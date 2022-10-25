@@ -40,4 +40,11 @@ public class PatientHistory {
 		patientHistory.remove(p);
 	}
 	
+	
+	public void displayResults() {
+		for (int i = 0; i < patientHistory.size(); i++) {
+			
+			System.out.print(patientHistory.get(i) + " ");
+		}
+	}
 }

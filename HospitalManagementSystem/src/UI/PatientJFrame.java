@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.PatientHistory;
+
 import javax.swing.JSplitPane;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -18,7 +21,7 @@ import java.awt.event.ActionEvent;
 public class PatientJFrame extends JFrame {
 
 	private JPanel contentPane;
-
+PatientHistory patientHistory;
 	/**
 	 * Launch the application.
 	 */
@@ -39,6 +42,7 @@ public class PatientJFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public PatientJFrame() {
+		patientHistory = new PatientHistory();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 760, 616);
 		contentPane = new JPanel();
@@ -73,13 +77,20 @@ public class PatientJFrame extends JFrame {
 		JButton btnNewPatient = new JButton("New Patient");
 		btnNewPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientJPanel patientPanel= new PatientJPanel();
+				PatientJPanel patientPanel= new PatientJPanel(patientHistory);
 				splitPane.setRightComponent(patientPanel);
 				
 			}
 		});
 		
 		JButton btnViewPatient = new JButton("View Patient");
+		btnViewPatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PatientViewPanel patientview= new PatientViewPanel(patientHistory);
+				splitPane.setRightComponent(patientview);
+				
+			}
+		});
 		GroupLayout gl_controlAreaPatient = new GroupLayout(controlAreaPatient);
 		gl_controlAreaPatient.setHorizontalGroup(
 			gl_controlAreaPatient.createParallelGroup(Alignment.LEADING)
