@@ -3,8 +3,6 @@ package Model;
 public class Patient extends Person{
 	
 	private int patientId;
-	//private String patientName;
-	//private int patientAge;
 	private String patientCity;
 	private String patientAddress;
 	

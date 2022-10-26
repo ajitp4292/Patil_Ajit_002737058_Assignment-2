@@ -36,15 +36,56 @@ public class PatientHistory {
 		
 	}
 	
-	public void deletePatients (Patient p) {
+	/*public void deletePatients (Patient p) {
+		patientHistory.remove(p);
+	}*/
+	
+	public void deletePatients (int p) {
 		patientHistory.remove(p);
 	}
 	
 	
-	public void displayResults() {
-		for (int i = 0; i < patientHistory.size(); i++) {
-			
-			System.out.print(patientHistory.get(i) + " ");
-		}
+	public int getPosition(int pos) {
+		patientHistory.indexOf(pos);
+		return pos-1;
+		
 	}
+	
+	public int getSize() {
+	int size=patientHistory.size();
+	return size;
+	}
+	
+	/*public void updatePatientDetails(int a , Patient p) {
+		Patient p = new Patient();
+		patientHistory.set(a, p);
+		
+	}*/
+	
+    public void modifyPatients(Patient currentPatient, Patient newPatient,int position) 
+    {
+       // int position = findPatient(currentPatient);
+        System.out.println(position);
+        if(position >= 0) {
+            modifyPatients(position, newPatient);
+        }
+        
+    }
+       /* private int findPatient(Patient searchPatient) {
+            return patientHistory.indexOf(searchPatient);
+            
+        }*/
+        
+        private void modifyPatients(int position, Patient newPatient) {
+            patientHistory.set(position, newPatient);
+           // System.out.println("Grocery item " + (position+1) + " has been modified.");
+        }
+	
+	
+        public void printPatientlist() {
+            System.out.println("You have " + patientHistory.size() + " patients in your list");
+            for(int i=0; i< patientHistory.size(); i++) {
+                System.out.println((i+1) + ". " + patientHistory.get(i));
+            }
+        }
 }

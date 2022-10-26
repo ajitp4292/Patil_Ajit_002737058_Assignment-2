@@ -20,10 +20,11 @@ public class PatientJPanel extends JPanel {
 	private JTextField patientAddresstxt;
 PatientHistory patientHistory;
 private JPanel PatientJPanel;
+
 	/**
 	 * Create the panel.
 	 */
-	public PatientJPanel(PatientHistory patientHistory) {
+	public  PatientJPanel(PatientHistory patientHistory) {
 		this.patientHistory=patientHistory;
 		setLayout(null);
 		
@@ -36,7 +37,17 @@ private JPanel PatientJPanel;
 		add(patienttxt);
 		patienttxt.setColumns(10);
 		
-		patienttxt.setText("1");
+		int size=patientHistory.getSize();
+		int id = (size+1);
+		String pid=String.valueOf(id);
+		
+		if (size==0) {
+			patienttxt.setText("1");
+		}
+		else {
+			patienttxt.setText(pid);
+		}
+		
 		
 		JLabel patientNamelb = new JLabel("Name");
 		patientNamelb.setBounds(129, 117, 61, 16);
@@ -89,7 +100,7 @@ private JPanel PatientJPanel;
 				
 		int patientID=Integer.parseInt(patientIdtrim);
 		int patientAge=Integer.parseInt(ageTrim);
-		System.out.println(patientID);
+		//System.out.println(patientID);
 		Patient p = patientHistory.addNewPatients();
 		p.setPatientId(patientID);
 		p.setAge(patientAge);
@@ -97,15 +108,30 @@ private JPanel PatientJPanel;
 		p.setPatientCity(city);
 		p.setPatientAddress(Address);
 		
+		//p.hashCode();
+		
 		JOptionPane.showMessageDialog(PatientJPanel, "Patient Added successfully.");
-		
-		//System.out.println(patientHistory.getHistory());
-		
+		//System.out.println(p.hashCode());
+		//p.getName();		
+		//System.out.println(p.getName());
+		//int p1 = p.hashCode();
 		patienttxt.setText(" ");
 		patientNametxt.setText(" ");
 		patientAgetxt.setText(" ");
 		patientCitytxt.setText(" ");
 		patientAddresstxt.setText(" ");
+		
+		//System.out.println(patientHistory.getSize());
+		int size=patientHistory.getSize();
+		int id = (size+1);
+		String pid=String.valueOf(id);
+		
+		if (size==0) {
+			patienttxt.setText("1");
+		}
+		else {
+			patienttxt.setText(pid);
+		}
 		
 		
 		
@@ -113,6 +139,7 @@ private JPanel PatientJPanel;
 		});
 		patientdatasavebtn.setBounds(238, 356, 117, 29);
 		add(patientdatasavebtn);
+		
 
 	}
 }

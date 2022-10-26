@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Model.Patient;
 import Model.PatientHistory;
 
 import javax.swing.JSplitPane;
@@ -16,12 +17,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class PatientJFrame extends JFrame {
 
 	private JPanel contentPane;
 PatientHistory patientHistory;
+Patient p;
 	/**
 	 * Launch the application.
 	 */
@@ -86,7 +89,7 @@ PatientHistory patientHistory;
 		JButton btnViewPatient = new JButton("View Patient");
 		btnViewPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientViewPanel patientview= new PatientViewPanel(patientHistory);
+				PatientViewPanel patientview= new PatientViewPanel(patientHistory,p);
 				splitPane.setRightComponent(patientview);
 				
 			}
