@@ -8,11 +8,16 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import Model.Community;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import java.awt.SystemColor;
 
 public class LoginPage implements ActionListener{
 	static ArrayList<String> userlist= new ArrayList<String>();
@@ -24,16 +29,18 @@ public class LoginPage implements ActionListener{
 	private static JComboBox<String> userRole;
 	private static JButton loginBtn;
 	private static JButton signUp;
-	private static JLabel successLb;
-	
-	
+	private JPanel loginPanel;
+	private JFrame loginFrame;
 	
 	public static void main(String[] args){
 		
 		JPanel loginPanel= new JPanel();
+		loginPanel.setBounds(0, 0, 350, 369);
+		loginPanel.setBackground(SystemColor.textHighlight);
 		JFrame loginFrame= new JFrame();
-		loginFrame.setSize(350,200);
+		loginFrame.setSize(350,397);
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginFrame.getContentPane().setLayout(null);
 		loginFrame.getContentPane().add(loginPanel);
 	    loginPanel.setLayout(null);
 		
@@ -63,6 +70,7 @@ public class LoginPage implements ActionListener{
 		userRole.addItem("ADMIN");
 		userRole.addItem("DOCTOR");
 		userRole.addItem("PATIENT");
+		userRole.addItem("COMMUNITYADMIN");
 		loginPanel.add(userRole);
 		
 		signUp=new JButton("Signup");
@@ -97,10 +105,6 @@ public class LoginPage implements ActionListener{
 		loginBtn.setBounds(198, 130, 80, 25);
 		loginPanel.add(loginBtn);
 		loginBtn.addActionListener(new LoginPage());
-		
-		successLb= new JLabel("success");
-		successLb.setBounds(158, 170, 80, 25);
-		loginPanel.add(successLb);
 		loginFrame.setVisible(true);
 		
 		
@@ -113,8 +117,22 @@ public class LoginPage implements ActionListener{
 		String passwordlg=passwordTxt.getText().toLowerCase();
 		String selectedRolelg = (String) userRole.getSelectedItem();
 		
+		
+		if (selectedRolelg == "") {
+			JOptionPane.showMessageDialog(loginPanel,"Please select the Role of the User");
+		}
+		
+		if (selectedRolelg=="PATIENT") {
+			PatientJFrame patientJFrame = new PatientJFrame();
+			patientJFrame.setVisible(true);
+			
+		}
 	if(selectedRolelg =="ADMIN") {
 		System.out.println("Welcome homepage ADMIN");
+		
+	}
+	
+	if(selectedRolelg =="COMMUNITYADMIN") {
 		
 	}
 
