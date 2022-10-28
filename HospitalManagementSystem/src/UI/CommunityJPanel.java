@@ -24,6 +24,7 @@ public class CommunityJPanel extends JPanel {
 	private  JTextField commZipTxt;
 CommunityCollector communityList;
 private  JPanel CommunityJPanel;
+private JTextField commIDTxt;
 	/**
 	 * Create the panel.
 	 */
@@ -32,16 +33,39 @@ private  JPanel CommunityJPanel;
 		setLayout(null);
 		
 		JLabel cityLb = new JLabel("City");
-		cityLb.setBounds(134, 77, 25, 16);
+		cityLb.setBounds(151, 138, 25, 16);
 		add(cityLb);
 		
 		JLabel commNamelb = new JLabel("Community Name");
-		commNamelb.setBounds(54, 150, 113, 16);
+		commNamelb.setBounds(63, 193, 113, 16);
 		add(commNamelb);
 		
 		JLabel commZiplb = new JLabel("Zipcode");
-		commZiplb.setBounds(106, 227, 61, 16);
+		commZiplb.setBounds(106, 253, 61, 16);
 		add(commZiplb);
+		
+		JLabel commIdlb = new JLabel("CommunityId");
+		commIdlb.setBounds(85, 84, 91, 16);
+		add(commIdlb);
+		
+		
+		commIDTxt = new JTextField();
+		commIDTxt.setBounds(183, 79, 130, 26);
+		add(commIDTxt);
+		commIDTxt.setColumns(10);
+		
+		
+		
+		int size=communityList.getSize();
+		int id = (size+1);
+		String pid=String.valueOf(id);
+		
+		if (size==0) {
+			commIDTxt.setText("1");
+		}
+		else {
+			commIDTxt.setText(pid);
+		}
 		
 		commCityTxt = new JTextField();
 		commCityTxt.addKeyListener(new KeyAdapter() {
@@ -60,7 +84,7 @@ private  JPanel CommunityJPanel;
 					}
 			}
 		});
-		commCityTxt.setBounds(183, 72, 130, 26);
+		commCityTxt.setBounds(183, 133, 130, 26);
 		add(commCityTxt);
 		commCityTxt.setColumns(10);
 		
@@ -82,7 +106,7 @@ private  JPanel CommunityJPanel;
 				
 			}
 		});
-		commNameTxt.setBounds(183, 145, 130, 26);
+		commNameTxt.setBounds(183, 188, 130, 26);
 		add(commNameTxt);
 		commNameTxt.setColumns(10);
 		
@@ -101,7 +125,7 @@ private  JPanel CommunityJPanel;
 				
 			}
 		});
-		commZipTxt.setBounds(183, 222, 130, 26);
+		commZipTxt.setBounds(183, 248, 130, 26);
 		add(commZipTxt);
 		commZipTxt.setColumns(10);
 		
@@ -115,14 +139,15 @@ private  JPanel CommunityJPanel;
 				}
 				
 				else {	
-				
+				String commId=commIDTxt.getText().trim();
 				String city=commCityTxt.getText().trim();
 				String commName=commNameTxt.getText().trim();
 				String commZipcd= commZipTxt.getText().trim();
 				
-				
+		int communityId=Integer.parseInt(commId);
 		int commZIPcd=Integer.parseInt(commZipcd);
 		Community comm = communityList.addNewCommunity();
+		comm.setCommunityId(communityId);
 		comm.setCity(city);
 		comm.setCommunityName(commName);
 		comm.setcommunityZipcd(commZIPcd);
@@ -139,6 +164,17 @@ private  JPanel CommunityJPanel;
 		commNameTxt.setText(" ");
 		commZipTxt.setText(" ");
 		
+		int size=communityList.getSize();
+		int id = (size+1);
+		String pid=String.valueOf(id);
+		
+		if (size==0) {
+			commIDTxt.setText("1");
+		}
+		else {
+			commIDTxt.setText(pid);
+		}
+		
 		
 				
 			}
@@ -147,6 +183,8 @@ private  JPanel CommunityJPanel;
 		});
 		saveCommbtn.setBounds(183, 299, 117, 29);
 		add(saveCommbtn);
+		
+		
 
 	}
 }

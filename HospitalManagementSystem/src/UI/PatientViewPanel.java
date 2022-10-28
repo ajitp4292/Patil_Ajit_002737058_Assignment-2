@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class PatientViewPanel extends JPanel {
 	private JTable table;
@@ -35,6 +36,7 @@ private JPanel PatientViewPanel;
 	 * Create the panel.
 	 */
 	public PatientViewPanel(PatientHistory patientHistory , Patient p) {
+		setBackground(UIManager.getColor("Desktop.background"));
 		this.patientHistory=patientHistory;
 		//p.getAge();
 		//System.out.println(p.getAge());
@@ -61,6 +63,7 @@ private JPanel PatientViewPanel;
 		table.setModel(model);
 		
 		JButton patientDeletebtn = new JButton("Delete");
+		patientDeletebtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		patientDeletebtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRowindex= table.getSelectedRow();
@@ -110,6 +113,7 @@ private JPanel PatientViewPanel;
 		add(patientDeletebtn);
 		
 		JButton patientViewbtn = new JButton("View");
+		patientViewbtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		patientViewbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRowindex= table.getSelectedRow();
@@ -190,6 +194,7 @@ private JPanel PatientViewPanel;
 		add(patientAddresslb);
 		
 		JButton patientUpdatebtn = new JButton("Update");
+		patientUpdatebtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		patientUpdatebtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

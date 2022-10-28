@@ -65,7 +65,7 @@ public class PatientHistory {
     public void modifyPatients(Patient currentPatient, Patient newPatient,int position) 
     {
        // int position = findPatient(currentPatient);
-        System.out.println(position);
+       // System.out.println(position);
         if(position >= 0) {
             modifyPatients(position, newPatient);
         }

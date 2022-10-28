@@ -48,7 +48,7 @@ private ArrayList <Community> communityList;
 	
     public void modifyCommunity(Community currentCommunity, Community newCommunity,int position) 
     {
-        System.out.println(position);
+        //System.out.println(position);
         if(position >= 0) {
             modifyCommunity(position, newCommunity);
         }

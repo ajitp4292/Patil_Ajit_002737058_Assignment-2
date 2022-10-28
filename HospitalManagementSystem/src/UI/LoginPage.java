@@ -14,6 +14,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Model.Community;
+import Model.CommunityCollector;
+import Model.Hospital;
+import Model.HospitalDirectory;
+import Model.Patient;
+import Model.PatientHistory;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -30,14 +35,32 @@ public class LoginPage implements ActionListener{
 	private static JButton loginBtn;
 	private static JButton signUp;
 	private JPanel loginPanel;
-	private JFrame loginFrame;
-	
+	private static JFrame loginFrame;
+	private JFrame PatientJFrame;
+	private JFrame CommunityJFrame;
+	private JFrame HospitalJFrame;
+	//private  ArrayList <Patient> patientHistory;
+	private static PatientHistory  patientHistory;
+	private static CommunityCollector communityList;
+	private static HospitalDirectory hospitalDirectory;
+    //Community comm;
+	Patient p;
+	private static Hospital hosp;
+	private static Community comm;
 	public static void main(String[] args){
+		
+		//ArrayList <Patient> patientHistory = new ArrayList <Patient>();
+		patientHistory = new PatientHistory();
+		communityList = new CommunityCollector();
+		hospitalDirectory= new HospitalDirectory();
+		comm= new Community();
+		hosp= new Hospital(comm);
+		
 		
 		JPanel loginPanel= new JPanel();
 		loginPanel.setBounds(0, 0, 350, 369);
 		loginPanel.setBackground(SystemColor.textHighlight);
-		JFrame loginFrame= new JFrame();
+	    loginFrame= new JFrame();
 		loginFrame.setSize(350,397);
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.getContentPane().setLayout(null);
@@ -71,6 +94,7 @@ public class LoginPage implements ActionListener{
 		userRole.addItem("DOCTOR");
 		userRole.addItem("PATIENT");
 		userRole.addItem("COMMUNITYADMIN");
+		userRole.addItem("HOSPITALADMIN");
 		loginPanel.add(userRole);
 		
 		signUp=new JButton("Signup");
@@ -123,8 +147,12 @@ public class LoginPage implements ActionListener{
 		}
 		
 		if (selectedRolelg=="PATIENT") {
-			PatientJFrame patientJFrame = new PatientJFrame();
-			patientJFrame.setVisible(true);
+			
+			PatientJFrame pJFrame = new PatientJFrame(patientHistory,loginFrame);
+			//patientJFrame.setVisible(true);
+			//PatientViewPanel pPanelview = new PatientViewPanel(patientHistory,p);
+			pJFrame.setVisible(true);
+			loginFrame.dispose();
 			
 		}
 	if(selectedRolelg =="ADMIN") {
@@ -133,6 +161,16 @@ public class LoginPage implements ActionListener{
 	}
 	
 	if(selectedRolelg =="COMMUNITYADMIN") {
+		CommunityJFrame communityFrame = new CommunityJFrame(communityList,loginFrame);
+		communityFrame.setVisible(true);
+		loginFrame.dispose();
+	}
+	
+	if(selectedRolelg =="HOSPITALADMIN") {
+		HospitalJFrame hospitalFrame= new HospitalJFrame(hospitalDirectory,loginFrame,hosp,comm);
+		hospitalFrame.setVisible(true);
+		loginFrame.dispose();
+		
 		
 	}
 

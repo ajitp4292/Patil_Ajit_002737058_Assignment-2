@@ -11,6 +11,7 @@ import Model.PatientHistory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class PatientJPanel extends JPanel {
 	private JTextField patienttxt;
@@ -25,6 +26,7 @@ private JPanel PatientJPanel;
 	 * Create the panel.
 	 */
 	public  PatientJPanel(PatientHistory patientHistory) {
+		setBackground(UIManager.getColor("Desktop.background"));
 		this.patientHistory=patientHistory;
 		setLayout(null);
 		
@@ -86,6 +88,7 @@ private JPanel PatientJPanel;
 		patientAddresstxt.setColumns(10);
 		
 		JButton patientdatasavebtn = new JButton("Save");
+		patientdatasavebtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		patientdatasavebtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -142,4 +145,5 @@ private JPanel PatientJPanel;
 		
 
 	}
+	
 }

@@ -17,12 +17,15 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CommunityJFrame extends JFrame {
 
 	private JPanel contentPane;
-	CommunityCollector communityList;
+	private static CommunityCollector communityList;
 	Community com;
+	private static JFrame loginFrame;
+	private static CommunityJFrame frame; 
 
 	/**
 	 * Launch the application.
@@ -31,7 +34,7 @@ public class CommunityJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CommunityJFrame frame = new CommunityJFrame();
+					 frame = new CommunityJFrame(communityList,loginFrame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,10 +46,11 @@ public class CommunityJFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CommunityJFrame() {
-		communityList = new CommunityCollector();
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public CommunityJFrame(CommunityCollector communityList,JFrame loginFrame) {
+		//communityList = new CommunityCollector();
+		CommunityJFrame.loginFrame=loginFrame;
+		this.communityList=communityList;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 614, 557);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,18 +77,40 @@ public class CommunityJFrame extends JFrame {
 		createCommunity.setBackground(UIManager.getColor("Button.darkShadow"));
 		
 		JButton communityManage = new JButton("Community Manager");
+		communityManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CommunityMangJPanel communitymanager = new CommunityMangJPanel(communityList,com);
+				splitPane.setRightComponent(communitymanager);
+				
+			}
+		});
 		communityManage.setBackground(UIManager.getColor("Button.darkShadow"));
+		
+		JButton commlogoutbtn = new JButton("Logout");
+		commlogoutbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loginFrame.setVisible(true);
+				
+				dispose();
+				
+			}
+		});
+		commlogoutbtn.setForeground(UIManager.getColor("Button.darkShadow"));
 		GroupLayout gl_controlAreacommunity = new GroupLayout(controlAreacommunity);
 		gl_controlAreacommunity.setHorizontalGroup(
-			gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
+			gl_controlAreacommunity.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(createCommunity)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_controlAreacommunity.createSequentialGroup()
+					.addContainerGap(15, Short.MAX_VALUE))
+				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(communityManage)
 					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_controlAreacommunity.createSequentialGroup()
+					.addGap(41)
+					.addComponent(commlogoutbtn)
+					.addContainerGap(57, Short.MAX_VALUE))
 		);
 		gl_controlAreacommunity.setVerticalGroup(
 			gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
@@ -93,7 +119,9 @@ public class CommunityJFrame extends JFrame {
 					.addComponent(createCommunity)
 					.addGap(43)
 					.addComponent(communityManage)
-					.addContainerGap(308, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+					.addComponent(commlogoutbtn)
+					.addGap(47))
 		);
 		controlAreacommunity.setLayout(gl_controlAreacommunity);
 		

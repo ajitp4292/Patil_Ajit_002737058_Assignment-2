@@ -1,12 +1,16 @@
 package Model;
 
 public class Community {
-
+	
+private int communityId;
 private String city;
 private String communityName;
 private int communityZipcode;
 
 
+public int getCommunityId() {
+	return communityId;
+}
 public String getCity() {
 	return city;
 }
@@ -20,6 +24,10 @@ public String getCommunityName() {
 public int getcommunityZipcd() {
 	
 	return communityZipcode;
+}
+
+public void setCommunityId(int communityId) {
+	this.communityId=communityId;
 }
 
 public void setCity(String city) {
