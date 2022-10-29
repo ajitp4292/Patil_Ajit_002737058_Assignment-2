@@ -1,6 +1,6 @@
 package Model;
 
-public class Hospital extends Community {
+public class Hospital  {
 	private int hospitalID;
 	private  String hospitalName;
 	

@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import Model.Community;
 import Model.CommunityCollector;
+import Model.HospitalDirectory;
 
 import javax.swing.JSplitPane;
 import javax.swing.GroupLayout;
@@ -24,6 +25,7 @@ public class CommunityJFrame extends JFrame {
 
 	private JPanel contentPane;
 	private static CommunityCollector communityList;
+	private static HospitalDirectory hospitalDirectory;
 	//Community com;
 	//static Community comm;
 	private static JFrame loginFrame;
@@ -38,7 +40,7 @@ public class CommunityJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					 frame = new CommunityJFrame(communityList,loginFrame,hosp1,hosp2);
+					 frame = new CommunityJFrame(communityList,hospitalDirectory,loginFrame,hosp1,hosp2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,12 +52,15 @@ public class CommunityJFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CommunityJFrame(CommunityCollector communityList,JFrame loginFrame, ArrayList<String> hosp1,ArrayList<String> hosp2)  {
+	public CommunityJFrame(CommunityCollector communityList,HospitalDirectory hospitalDirectory,JFrame loginFrame, ArrayList<String> hosp1,ArrayList<String> hosp2)  {
 		//communityList = new CommunityCollector();
 		CommunityJFrame.loginFrame=loginFrame;
+		
 		this.communityList=communityList;
+		this.hospitalDirectory=hospitalDirectory;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 614, 557);
+		setBounds(100, 100, 671, 557);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -63,7 +68,7 @@ public class CommunityJFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setBounds(6, 0, 602, 523);
+		splitPane.setBounds(6, 0, 659, 523);
 		contentPane.add(splitPane);
 		
 		JPanel controlAreacommunity = new JPanel();
@@ -110,43 +115,68 @@ public class CommunityJFrame extends JFrame {
 			}
 		});
 		searchcommbtn.setBackground(UIManager.getColor("Button.darkShadow"));
+		
+		JButton commHospcreatelb = new JButton("Create Hospital");
+		commHospcreatelb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HospitalJPanel hospitalPanel= new HospitalJPanel(hospitalDirectory,hosp1,hosp2);
+				splitPane.setRightComponent(hospitalPanel);
+			}
+		});
+		
+		JButton commHospitalManlb = new JButton("Hospital Manager");
+		commHospitalManlb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HospitalMangJPanel hospitalmanager = new HospitalMangJPanel(hospitalDirectory);
+				splitPane.setRightComponent(hospitalmanager);
+				
+			}
+		});
 		GroupLayout gl_controlAreacommunity = new GroupLayout(controlAreacommunity);
 		gl_controlAreacommunity.setHorizontalGroup(
 			gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_controlAreacommunity.createSequentialGroup()
+					.addGroup(gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_controlAreacommunity.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(createCommunity))
+						.addGroup(gl_controlAreacommunity.createSequentialGroup()
+							.addGap(20)
+							.addGroup(gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
+								.addComponent(commHospcreatelb, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+								.addComponent(commHospitalManlb, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_controlAreacommunity.createSequentialGroup()
+							.addGap(44)
+							.addGroup(gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
+								.addComponent(commlogoutbtn)
+								.addComponent(searchcommbtn))))
+					.addContainerGap(30, Short.MAX_VALUE))
+				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(createCommunity)
-					.addContainerGap(15, Short.MAX_VALUE))
-				.addGroup(gl_controlAreacommunity.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(communityManage)
-					.addContainerGap())
-				.addGroup(gl_controlAreacommunity.createSequentialGroup()
-					.addGap(41)
-					.addComponent(commlogoutbtn)
-					.addContainerGap(57, Short.MAX_VALUE))
-				.addGroup(gl_controlAreacommunity.createSequentialGroup()
-					.addGap(32)
-					.addComponent(searchcommbtn)
-					.addContainerGap(37, Short.MAX_VALUE))
+					.addComponent(communityManage, 0, 0, Short.MAX_VALUE)
+					.addGap(33))
 		);
 		gl_controlAreacommunity.setVerticalGroup(
 			gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addGap(110)
 					.addComponent(createCommunity)
-					.addGap(43)
+					.addGap(18)
 					.addComponent(communityManage)
-					.addGap(35)
+					.addGap(18)
+					.addComponent(commHospcreatelb)
+					.addGap(18)
+					.addComponent(commHospitalManlb)
+					.addGap(27)
 					.addComponent(searchcommbtn)
-					.addPreferredGap(ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
 					.addComponent(commlogoutbtn)
-					.addGap(47))
+					.addGap(44))
 		);
 		controlAreacommunity.setLayout(gl_controlAreacommunity);
 		
-		JPanel workAreacommunity = new JPanel();
-		workAreacommunity.setBackground(UIManager.getColor("Desktop.background"));
-		splitPane.setRightComponent(workAreacommunity);
+		JPanel workAreaComm = new JPanel();
+		workAreaComm.setBackground(UIManager.getColor("Desktop.background"));
+		splitPane.setRightComponent(workAreaComm);
 	}
 }

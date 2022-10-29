@@ -62,12 +62,13 @@ public HospitalDirectory() {
         }
 	
 
-        public void printAList() {
+        public void showHopsitalList() {
         	
+   for (Hospital hosp:hospitalDirectory) {
+	   
+	   System.out.println(hosp.getHospitalID());
    
-            System.out.println("You have " + hospitalDirectory.size() + " items in your grocery list");
-            for(int i=0; i< hospitalDirectory.size(); i++) {
-                System.out.println((i+1) + ". " + hospitalDirectory.get(i));
+            
             }
        
 	

@@ -56,7 +56,7 @@ public class HospitalJFrame extends JFrame {
 		
 		this.hospitalDirectory=hospitalDirectory;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 560, 577);
+		setBounds(100, 100, 605, 577);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -64,7 +64,7 @@ public class HospitalJFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setBounds(6, 6, 537, 533);
+		splitPane.setBounds(6, 6, 593, 533);
 		contentPane.add(splitPane);
 		
 		JPanel controlAreaHospital = new JPanel();

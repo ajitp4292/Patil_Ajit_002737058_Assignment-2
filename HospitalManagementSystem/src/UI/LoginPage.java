@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 
 import Model.Community;
 import Model.CommunityCollector;
+import Model.Doctor;
+import Model.DoctorDirectory;
 import Model.Hospital;
 import Model.HospitalDirectory;
 import Model.Patient;
@@ -45,10 +47,12 @@ public class LoginPage implements ActionListener{
 	private static PatientHistory  patientHistory;
 	private static CommunityCollector communityList;
 	private static HospitalDirectory hospitalDirectory;
+	private static DoctorDirectory doctorDirectory;
     //Community comm;
 	Patient p;
 	private static Hospital hosp;
 	private static Community comm;
+	private static Doctor doc;
 	
 	public static void main(String[] args){
 		
@@ -56,6 +60,7 @@ public class LoginPage implements ActionListener{
 		patientHistory = new PatientHistory();
 		communityList = new CommunityCollector();
 		hospitalDirectory= new HospitalDirectory();
+		doctorDirectory= new DoctorDirectory();
 		//comm= new Community();
 		//hosp= new Hospital(comm);
 		
@@ -97,7 +102,7 @@ public class LoginPage implements ActionListener{
 		userRole= new JComboBox<String>();
 		userRole.setBounds(100, 80, 165, 25);
 		userRole.addItem("");
-		userRole.addItem("ADMIN");
+		userRole.addItem("SYSTEMADMIN");
 		userRole.addItem("DOCTOR");
 		userRole.addItem("PATIENT");
 		userRole.addItem("COMMUNITYADMIN");
@@ -169,14 +174,16 @@ public class LoginPage implements ActionListener{
 	}
 	
 	if(selectedRolelg =="COMMUNITYADMIN") {
-		CommunityJFrame communityFrame = new CommunityJFrame(communityList,loginFrame,hosp1,hosp2);
+		CommunityJFrame communityFrame = new CommunityJFrame(communityList,hospitalDirectory,loginFrame,hosp1,hosp2);
 		communityFrame.setVisible(true);
 		loginFrame.dispose();
 	}
 	
 	if(selectedRolelg =="HOSPITALADMIN") {
-		HospitalJFrame hospitalFrame= new HospitalJFrame(hospitalDirectory,loginFrame,hosp1,hosp2);
-		hospitalFrame.setVisible(true);
+		//HospitalJFrame hospitalFrame= new HospitalJFrame(hospitalDirectory,loginFrame,hosp1,hosp2);
+		//hospitalFrame.setVisible(true);
+		DoctorJFrame doctJframe= new DoctorJFrame(doctorDirectory,loginFrame);
+		doctJframe.setVisible(true);
 		loginFrame.dispose();
 		
 		

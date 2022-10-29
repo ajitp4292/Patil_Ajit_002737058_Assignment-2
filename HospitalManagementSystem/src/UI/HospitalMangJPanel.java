@@ -51,7 +51,7 @@ public class HospitalMangJPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				//System.out.println(hospitalDirectory);
-				
+				 hospitalDirectory.showHopsitalList();
 				
 		           
 			}
