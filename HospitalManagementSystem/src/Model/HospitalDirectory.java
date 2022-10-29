@@ -18,10 +18,10 @@ public HospitalDirectory() {
 
 	
 
-	public Hospital addNewHospital(Hospital newHospital) {
+	public Hospital addNewHospital(Community comm) {
 		 
-
-		//Hospital newHospital= new Hospital();
+      
+		Hospital newHospital= new Hospital(comm);
 		hospitalDirectory.add(newHospital);
 		return newHospital;
 		
@@ -62,7 +62,15 @@ public HospitalDirectory() {
         }
 	
 
+        public void printAList() {
+        	
+   
+            System.out.println("You have " + hospitalDirectory.size() + " items in your grocery list");
+            for(int i=0; i< hospitalDirectory.size(); i++) {
+                System.out.println((i+1) + ". " + hospitalDirectory.get(i));
+            }
+       
 	
 	
-	
+}
 }

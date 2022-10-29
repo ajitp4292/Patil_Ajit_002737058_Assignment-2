@@ -25,6 +25,7 @@ public class CommunityJPanel extends JPanel {
 CommunityCollector communityList;
 private  JPanel CommunityJPanel;
 private JTextField commIDTxt;
+//private static Community comm;
 	/**
 	 * Create the panel.
 	 */
@@ -146,7 +147,8 @@ private JTextField commIDTxt;
 				
 		int communityId=Integer.parseInt(commId);
 		int commZIPcd=Integer.parseInt(commZipcd);
-		Community comm = communityList.addNewCommunity();
+		
+Community comm=communityList.addNewCommunity();
 		comm.setCommunityId(communityId);
 		comm.setCity(city);
 		comm.setCommunityName(commName);

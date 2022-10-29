@@ -11,6 +11,7 @@ import Model.Community;
 import Model.Hospital;
 import Model.HospitalDirectory;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class HospitalJPanel extends JPanel {
@@ -20,12 +21,14 @@ public class HospitalJPanel extends JPanel {
 	private JTextField commNameTxt;
 	HospitalDirectory hospitalDirectory;
 	private  JPanel HospitalJPanel;
-	private static Hospital hosp;
-private static Community comm;
+	private static ArrayList<String> hosp1;
+	private static ArrayList<String> hosp2;
+	//private static Hospital hosp;
+//private static Community comm;
 	/**
 	 * Create the panel.
 	 */
-	public HospitalJPanel(HospitalDirectory hospitalDirectory,Hospital hosp,Community comm) {
+	public HospitalJPanel(HospitalDirectory hospitalDirectory, ArrayList<String> hosp1,ArrayList<String> hosp2) {
 		setBackground(UIManager.getColor("Desktop.background"));
 		setLayout(null);
 		
@@ -55,7 +58,16 @@ private static Community comm;
 		//String pid=String.valueOf(id);
 		
 	
+		int size=hospitalDirectory.getSize();
+		int id = (size+1);
+		String pid=String.valueOf(id);
+
+		if (size==0) {
 			hospitalIDTxt.setText("1");
+		}
+		else {
+			hospitalIDTxt.setText(pid);
+		}
 
 		
 		
@@ -90,8 +102,8 @@ private static Community comm;
 		
 int hospitalId=Integer.parseInt(hospId);
 int hospitalCommID=Integer.parseInt(hospCommID);
-
-hospitalDirectory.addNewHospital(hosp);
+Community comm= new Community();
+Hospital hosp=hospitalDirectory.addNewHospital(comm);
 
 //hospitalDirectory.addNewHospital(hosp);
 hosp.setHospitalID(hospitalId);
@@ -100,8 +112,17 @@ hosp.setCommunityId(hospitalCommID);
 hosp.setCommunityName(hospCommName);
 
 
+if (hospitalCommID == 1) {
+	hosp1.add(hospName);
+
+	}
+
+if(hospitalCommID == 2) {
+	hosp2.add(hospName);
+}
 
 //p.hashCode();
+//System.out.println(hosp1);
 
 JOptionPane.showMessageDialog(HospitalJPanel, "Hospital Added successfully.");
 //System.out.println(p.hashCode());

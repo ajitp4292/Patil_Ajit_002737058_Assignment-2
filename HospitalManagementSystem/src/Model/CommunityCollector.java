@@ -21,9 +21,9 @@ private ArrayList <Community> communityList;
 	public Community addNewCommunity() {
 		 
 
-		Community newCommunity= new Community();
-		communityList.add(newCommunity);
-		return newCommunity;
+		Community newComm= new Community();
+		communityList.add(newComm);
+		return newComm;
 		
 		
 	}
@@ -32,6 +32,10 @@ private ArrayList <Community> communityList;
 	public void deleteCommunity (int p) {
 		communityList.remove(p);
 	}
+	
+	/*public void deleteCommunity (Community com) {
+		communityList.remove(com);
+	}*/
 	
 	
 	public int getPosition(int pos) {
@@ -59,7 +63,6 @@ private ArrayList <Community> communityList;
             communityList.set(position, newCommunity);
            // System.out.println("Grocery item " + (position+1) + " has been modified.");
         }
-	
 	
        
 }

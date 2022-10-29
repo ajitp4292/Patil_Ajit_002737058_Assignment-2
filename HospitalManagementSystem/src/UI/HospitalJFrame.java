@@ -18,14 +18,17 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class HospitalJFrame extends JFrame {
 
 	private JPanel contentPane;
 	private static HospitalDirectory hospitalDirectory;
-	static Hospital hosp;
-	static Community comm;
+	//static Hospital hosp;
+	//static Community comm;
+	private static ArrayList<String> hosp1;
+	private static ArrayList<String> hosp2;
 	private static JFrame loginFrame;
 	private static HospitalJFrame frame; 
 	/**
@@ -35,7 +38,7 @@ public class HospitalJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					 frame = new HospitalJFrame(hospitalDirectory, loginFrame,hosp,comm);
+					 frame = new HospitalJFrame(hospitalDirectory, loginFrame,hosp1,hosp2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,9 +50,10 @@ public class HospitalJFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HospitalJFrame(HospitalDirectory hospitalDirectory, JFrame loginframe,Hospital hosp,Community comm) {
+	public HospitalJFrame(HospitalDirectory hospitalDirectory, JFrame loginFrame,ArrayList<String> hosp1,ArrayList<String> hosp2) {
 		
 		HospitalJFrame.loginFrame=loginFrame;
+		
 		this.hospitalDirectory=hospitalDirectory;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 577);
@@ -71,7 +75,7 @@ public class HospitalJFrame extends JFrame {
 		createHopistalbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				HospitalJPanel hospitalPanel= new HospitalJPanel(hospitalDirectory,hosp,comm);
+				HospitalJPanel hospitalPanel= new HospitalJPanel(hospitalDirectory,hosp1,hosp2);
 				splitPane.setRightComponent(hospitalPanel);
 				
 			}
@@ -83,7 +87,7 @@ public class HospitalJFrame extends JFrame {
 		mangHospitalbtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		mangHospitalbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HospitalMangJPanel hospitalmanager = new HospitalMangJPanel(hospitalDirectory,hosp);
+				HospitalMangJPanel hospitalmanager = new HospitalMangJPanel(hospitalDirectory);
 				splitPane.setRightComponent(hospitalmanager);
 				
 			}

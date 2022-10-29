@@ -26,6 +26,8 @@ import java.awt.SystemColor;
 
 public class LoginPage implements ActionListener{
 	static ArrayList<String> userlist= new ArrayList<String>();
+	private static ArrayList<String> hosp1;
+	private static ArrayList<String> hosp2;
 	private static JLabel usernameLb;
 	private static JTextField usernameTxt;
 	private static 	JLabel passwordLb;
@@ -47,14 +49,15 @@ public class LoginPage implements ActionListener{
 	Patient p;
 	private static Hospital hosp;
 	private static Community comm;
+	
 	public static void main(String[] args){
 		
 		//ArrayList <Patient> patientHistory = new ArrayList <Patient>();
 		patientHistory = new PatientHistory();
 		communityList = new CommunityCollector();
 		hospitalDirectory= new HospitalDirectory();
-		comm= new Community();
-		hosp= new Hospital(comm);
+		//comm= new Community();
+		//hosp= new Hospital(comm);
 		
 		
 		JPanel loginPanel= new JPanel();
@@ -67,6 +70,7 @@ public class LoginPage implements ActionListener{
 		loginFrame.getContentPane().add(loginPanel);
 	    loginPanel.setLayout(null);
 		
+	    
 	    usernameLb= new JLabel("Username");
 	    usernameLb.setBounds(10, 20, 80, 25);
 		loginPanel.add(usernameLb);
@@ -86,6 +90,9 @@ public class LoginPage implements ActionListener{
 		roleLb= new JLabel("UserRole");
 		roleLb.setBounds(10, 80, 80, 25);
 		loginPanel.add(roleLb);
+		
+		hosp1= new ArrayList<String>();
+		hosp2= new ArrayList<String>();
 		
 		userRole= new JComboBox<String>();
 		userRole.setBounds(100, 80, 165, 25);
@@ -132,6 +139,7 @@ public class LoginPage implements ActionListener{
 		loginFrame.setVisible(true);
 		
 		
+		
 	}
 
 	//@Override
@@ -161,13 +169,13 @@ public class LoginPage implements ActionListener{
 	}
 	
 	if(selectedRolelg =="COMMUNITYADMIN") {
-		CommunityJFrame communityFrame = new CommunityJFrame(communityList,loginFrame);
+		CommunityJFrame communityFrame = new CommunityJFrame(communityList,loginFrame,hosp1,hosp2);
 		communityFrame.setVisible(true);
 		loginFrame.dispose();
 	}
 	
 	if(selectedRolelg =="HOSPITALADMIN") {
-		HospitalJFrame hospitalFrame= new HospitalJFrame(hospitalDirectory,loginFrame,hosp,comm);
+		HospitalJFrame hospitalFrame= new HospitalJFrame(hospitalDirectory,loginFrame,hosp1,hosp2);
 		hospitalFrame.setVisible(true);
 		loginFrame.dispose();
 		

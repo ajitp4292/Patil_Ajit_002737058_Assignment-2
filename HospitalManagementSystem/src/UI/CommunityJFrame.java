@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -23,9 +24,12 @@ public class CommunityJFrame extends JFrame {
 
 	private JPanel contentPane;
 	private static CommunityCollector communityList;
-	Community com;
+	//Community com;
+	//static Community comm;
 	private static JFrame loginFrame;
-	private static CommunityJFrame frame; 
+	private static CommunityJFrame frame;
+	private static ArrayList<String> hosp1;
+	private static ArrayList<String> hosp2;
 
 	/**
 	 * Launch the application.
@@ -34,7 +38,7 @@ public class CommunityJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					 frame = new CommunityJFrame(communityList,loginFrame);
+					 frame = new CommunityJFrame(communityList,loginFrame,hosp1,hosp2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +50,7 @@ public class CommunityJFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CommunityJFrame(CommunityCollector communityList,JFrame loginFrame) {
+	public CommunityJFrame(CommunityCollector communityList,JFrame loginFrame, ArrayList<String> hosp1,ArrayList<String> hosp2)  {
 		//communityList = new CommunityCollector();
 		CommunityJFrame.loginFrame=loginFrame;
 		this.communityList=communityList;
@@ -79,7 +83,7 @@ public class CommunityJFrame extends JFrame {
 		JButton communityManage = new JButton("Community Manager");
 		communityManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CommunityMangJPanel communitymanager = new CommunityMangJPanel(communityList,com);
+				CommunityMangJPanel communitymanager = new CommunityMangJPanel(communityList);
 				splitPane.setRightComponent(communitymanager);
 				
 			}
@@ -96,9 +100,19 @@ public class CommunityJFrame extends JFrame {
 			}
 		});
 		commlogoutbtn.setForeground(UIManager.getColor("Button.darkShadow"));
+		
+		JButton searchcommbtn = new JButton("Search");
+		searchcommbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CommunitySearch communitysearch = new CommunitySearch(communityList,hosp1,hosp2);
+				splitPane.setRightComponent(communitysearch);
+				
+			}
+		});
+		searchcommbtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		GroupLayout gl_controlAreacommunity = new GroupLayout(controlAreacommunity);
 		gl_controlAreacommunity.setHorizontalGroup(
-			gl_controlAreacommunity.createParallelGroup(Alignment.TRAILING)
+			gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(createCommunity)
@@ -107,10 +121,14 @@ public class CommunityJFrame extends JFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(communityManage)
 					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_controlAreacommunity.createSequentialGroup()
+				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addGap(41)
 					.addComponent(commlogoutbtn)
 					.addContainerGap(57, Short.MAX_VALUE))
+				.addGroup(gl_controlAreacommunity.createSequentialGroup()
+					.addGap(32)
+					.addComponent(searchcommbtn)
+					.addContainerGap(37, Short.MAX_VALUE))
 		);
 		gl_controlAreacommunity.setVerticalGroup(
 			gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
@@ -119,7 +137,9 @@ public class CommunityJFrame extends JFrame {
 					.addComponent(createCommunity)
 					.addGap(43)
 					.addComponent(communityManage)
-					.addPreferredGap(ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+					.addGap(35)
+					.addComponent(searchcommbtn)
+					.addPreferredGap(ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
 					.addComponent(commlogoutbtn)
 					.addGap(47))
 		);
