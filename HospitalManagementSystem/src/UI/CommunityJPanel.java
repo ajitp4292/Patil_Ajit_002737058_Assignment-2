@@ -67,6 +67,7 @@ private JTextField commIDTxt;
 		else {
 			commIDTxt.setText(pid);
 		}
+		commIDTxt.setEditable(true);
 		
 		commCityTxt = new JTextField();
 		commCityTxt.addKeyListener(new KeyAdapter() {

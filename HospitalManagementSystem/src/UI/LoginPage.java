@@ -30,6 +30,7 @@ public class LoginPage implements ActionListener{
 	static ArrayList<String> userlist= new ArrayList<String>();
 	private static ArrayList<String> hosp1;
 	private static ArrayList<String> hosp2;
+	private static ArrayList<String> doctorNames;
 	private static JLabel usernameLb;
 	private static JTextField usernameTxt;
 	private static 	JLabel passwordLb;
@@ -98,6 +99,7 @@ public class LoginPage implements ActionListener{
 		
 		hosp1= new ArrayList<String>();
 		hosp2= new ArrayList<String>();
+		doctorNames = new ArrayList<String>();
 		
 		userRole= new JComboBox<String>();
 		userRole.setBounds(100, 80, 165, 25);
@@ -161,7 +163,7 @@ public class LoginPage implements ActionListener{
 		
 		if (selectedRolelg=="PATIENT") {
 			
-			PatientJFrame pJFrame = new PatientJFrame(patientHistory,loginFrame);
+			PatientJFrame pJFrame = new PatientJFrame(patientHistory,loginFrame,communityList,hospitalDirectory,doctorDirectory);
 			//patientJFrame.setVisible(true);
 			//PatientViewPanel pPanelview = new PatientViewPanel(patientHistory,p);
 			pJFrame.setVisible(true);

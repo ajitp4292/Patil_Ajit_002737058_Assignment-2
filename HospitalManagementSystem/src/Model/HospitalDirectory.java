@@ -70,8 +70,31 @@ public HospitalDirectory() {
    
             
             }
+        }
+       
+	public ArrayList<String> showHospitalDetails(int commID) {
+	//String[] hnames= new String[10];
+	int a=hospitalDirectory.size();
+	a=a-1;
+	System.out.println(a);
+	int i;
+	ArrayList<String> hospnames = new ArrayList<String>();
+
+		for (Hospital hosp:hospitalDirectory) {
+			for(i=0;i<a;i++) {
+			if (hosp.getCommunityId() == commID) {
+					
+				hospnames.add(hosp.getHospitalName());		
+				
+		}
+			
+		}
+		
+	}
+		return hospnames;
+        
        
 	
+	}
 	
-}
 }

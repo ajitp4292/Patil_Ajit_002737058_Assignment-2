@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DoctorDirectory {
 	
 private ArrayList <Doctor> doctorDirectory;
+
 	
 	public DoctorDirectory() {
 		
@@ -65,19 +66,33 @@ private ArrayList <Doctor> doctorDirectory;
         }
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    	public ArrayList<String> showDoctorDetails(String hospName) {
+    		//String[] hnames= new String[10];
+    		System.out.println(hospName);
+    		int a=doctorDirectory.size();
+    		a=a-1;
+    		//System.out.println(a);
+    		int i;
+    		ArrayList<String> doctorNames = new ArrayList<String>();
 
+    			for (Doctor doc:doctorDirectory) {
+    				//System.out.println(doc.getHospital());
+    				System.out.println("Outside");
+    				System.out.println(doc.getHospital());
+    				for(i=0;i<a;i++) {
+    				if (doc.getHospital().equals(hospName)) {
+    					System.out.println("indide");
+    					System.out.println(doc.getDoctorName());
+    					
+    			}
+    				
+    			}
+    			
+    		}
+    			return doctorNames;
+    	        
+    	       
+    		
+    		}
+	
 }

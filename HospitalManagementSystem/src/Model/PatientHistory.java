@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class PatientHistory {
 	
-	
+	Person p;
+	House h;
 
 	
 	private ArrayList <Patient> patientHistory;
@@ -22,14 +23,14 @@ public class PatientHistory {
 		this.history = history;
 	}*/
 
-	public Patient addNewPatients() {
+	public Patient addNewPatients(Person p,House h) {
 		 //String name;
 		// int age;
 		// int patientId;
 		 //String patientCity;
 		 //String patientAddress;
-
-		Patient newPatients= new Patient();
+		
+		Patient newPatients= new Patient(p,h);
 		patientHistory.add(newPatients);
 		return newPatients;
 		

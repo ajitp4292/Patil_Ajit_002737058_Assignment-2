@@ -14,6 +14,7 @@ public class Doctor {
 	private int doctorId;
 	private String doctorName;
 	private String Expertise;
+	//private String docHospName;
 	
 	
 	public int getDoctorID () {
@@ -61,7 +62,7 @@ public void setHospitalId(int hospitalId) {
 	hosp.setHospitalID(hospitalId);
 }
 
-public void setHopsitalName(String hospitalName) {
-	hosp.setHospitalName(hospitalName);
+public void setHopsitalName(String docHospName) {
+	hosp.setHospitalName(docHospName);
 }
 }

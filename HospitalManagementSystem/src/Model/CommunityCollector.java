@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class CommunityCollector {
 
 private ArrayList <Community> communityList;
+
 	
 	public CommunityCollector() {
 		
@@ -64,5 +65,16 @@ private ArrayList <Community> communityList;
            // System.out.println("Grocery item " + (position+1) + " has been modified.");
         }
 	
+        public int  FindCommunityIdByZipcd(int zipCd) {
+        	int CommID = 0;
+        	for(Community com:communityList) {
+        		if (com.getcommunityZipcd()==zipCd) {
+        		int comID= com.getCommunityId();
+        		CommID=comID;
+        		}
+        		
+        	}
+        	return CommID;	
+        }
        
 }

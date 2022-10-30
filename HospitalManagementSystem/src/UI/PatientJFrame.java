@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Model.CommunityCollector;
+import Model.DoctorDirectory;
+import Model.HospitalDirectory;
 import Model.Patient;
 import Model.PatientHistory;
 
@@ -32,6 +35,9 @@ private static JFrame loginFrame;
 private static PatientJFrame frame;
 private static JPanel workAreaPatient;
 private static JPanel controlAreaPatient;
+private static CommunityCollector communityList;
+private static HospitalDirectory hospitalDirectory;
+private static DoctorDirectory doctorDirectory;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +45,7 @@ private static JPanel controlAreaPatient;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new PatientJFrame(patientHistory,loginFrame);
+					frame = new PatientJFrame(patientHistory,loginFrame,communityList,hospitalDirectory,doctorDirectory);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,10 +57,13 @@ private static JPanel controlAreaPatient;
 	/**
 	 * Create the frame.
 	 */
-	public PatientJFrame(PatientHistory patientHistory,JFrame loginFrame) {
+	public PatientJFrame(PatientHistory patientHistory,JFrame loginFrame,CommunityCollector communityList,HospitalDirectory hospitalDirectory,DoctorDirectory doctorDirectory) {
 		PatientJFrame.loginFrame=loginFrame;
 		//patientHistory = new PatientHistory();//just removed oct 27 3pm
 		this.patientHistory=patientHistory;
+		this.communityList=communityList;
+		this.hospitalDirectory=hospitalDirectory;
+		this.doctorDirectory=doctorDirectory;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 760, 616);
 		contentPane = new JPanel();
@@ -102,7 +111,7 @@ private static JPanel controlAreaPatient;
 		btnViewPatient.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnViewPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientViewPanel patientview= new PatientViewPanel(patientHistory,p);
+				PatientViewPanel patientview= new PatientViewPanel(patientHistory,p,communityList,hospitalDirectory,doctorDirectory);
 				splitPane.setRightComponent(patientview);
 				
 			}
@@ -120,30 +129,36 @@ private static JPanel controlAreaPatient;
 				
 			}
 		});
+		
+		JButton hospSrhbtn = new JButton("Search Hospital");
 		GroupLayout gl_controlAreaPatient = new GroupLayout(controlAreaPatient);
 		gl_controlAreaPatient.setHorizontalGroup(
-			gl_controlAreaPatient.createParallelGroup(Alignment.TRAILING)
+			gl_controlAreaPatient.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_controlAreaPatient.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnViewPatient)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_controlAreaPatient.createSequentialGroup()
-					.addContainerGap(8, Short.MAX_VALUE)
-					.addComponent(btnNewPatient)
-					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_controlAreaPatient.createSequentialGroup()
 					.addGap(20)
 					.addComponent(logoutbtn)
 					.addContainerGap(24, Short.MAX_VALUE))
+				.addGroup(gl_controlAreaPatient.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_controlAreaPatient.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewPatient)
+						.addComponent(btnViewPatient))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_controlAreaPatient.createSequentialGroup()
+					.addContainerGap(9, Short.MAX_VALUE)
+					.addComponent(hospSrhbtn, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+					.addGap(14))
 		);
 		gl_controlAreaPatient.setVerticalGroup(
 			gl_controlAreaPatient.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_controlAreaPatient.createSequentialGroup()
-					.addGap(123)
+					.addGap(121)
 					.addComponent(btnNewPatient)
-					.addGap(26)
+					.addGap(28)
 					.addComponent(btnViewPatient)
-					.addPreferredGap(ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+					.addGap(34)
+					.addComponent(hospSrhbtn)
+					.addPreferredGap(ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
 					.addComponent(logoutbtn)
 					.addGap(53))
 		);

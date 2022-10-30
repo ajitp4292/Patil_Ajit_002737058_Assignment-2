@@ -13,10 +13,14 @@ import Model.DoctorDirectory;
 import Model.Hospital;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class DoctorJPanel extends JPanel {
 	private JTextField docIDTxt;
+	//private static ArrayList<String> doctorNames;
 	private JTextField docNameTxt;
 	private JTextField docSpecialityTxt;
 	private JTextField docHospIdTxt;
@@ -47,23 +51,88 @@ public class DoctorJPanel extends JPanel {
 		else {
 			docIDTxt.setText(pid);
 		}
-		
+		docIDTxt.setEditable(true);
 		docNameTxt = new JTextField();
+		docNameTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					docNameTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(DoctorJPanel, "Name must be a String value");
+						docNameTxt.setEditable(false);
+						
+					}	
+				
+			}
+		});
 		docNameTxt.setBounds(182, 111, 130, 26);
 		add(docNameTxt);
 		docNameTxt.setColumns(10);
 		
 		docSpecialityTxt = new JTextField();
+		docSpecialityTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					docSpecialityTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(DoctorJPanel, "Speciality must be a String value");
+						docSpecialityTxt.setEditable(false);
+						
+					}
+			}
+		});
 		docSpecialityTxt.setBounds(182, 166, 130, 26);
 		add(docSpecialityTxt);
 		docSpecialityTxt.setColumns(10);
 		
 		docHospIdTxt = new JTextField();
+		docHospIdTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					docHospIdTxt.setEditable(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(DoctorJPanel, "Hospital ID must be a Integer value");
+					docHospIdTxt.setEditable(false);
+				}
+				
+			}
+		});
 		docHospIdTxt.setBounds(182, 228, 130, 26);
 		add(docHospIdTxt);
 		docHospIdTxt.setColumns(10);
 		
 		docHospNameTxt = new JTextField();
+		docHospNameTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					docHospNameTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(DoctorJPanel, "Hospital name must be a String value");
+						docHospNameTxt.setEditable(false);
+						
+					}
+				
+			}
+		});
 		docHospNameTxt.setBounds(182, 282, 130, 26);
 		add(docHospNameTxt);
 		docHospNameTxt.setColumns(10);
@@ -103,7 +172,7 @@ public class DoctorJPanel extends JPanel {
 		String docSpeciality=docSpecialityTxt.getText().trim();
 		String docHospID= docHospIdTxt.getText().trim();
 		String docHospNm=docHospNameTxt.getText().trim();
-		
+		//doctorNames.add(doc)
 int docIDvalue=Integer.parseInt(docId);
 int docHospIDvalue=Integer.parseInt(docHospID);
 

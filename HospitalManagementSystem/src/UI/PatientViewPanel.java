@@ -10,8 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Model.CommunityCollector;
+import Model.DoctorDirectory;
+import Model.HospitalDirectory;
+import Model.House;
 import Model.Patient;
 import Model.PatientHistory;
+import Model.Person;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -20,11 +25,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.JComboBox;
 
 public class PatientViewPanel extends JPanel {
 	private JTable table;
 private JPanel PatientViewPanel;
 	PatientHistory patientHistory;
+	CommunityCollector communityList;
+	HospitalDirectory hospitalDirectory;
+	DoctorDirectory doctorDirectory;
 	Patient p ;
 	DefaultTableModel model;
 	private JTextField patientIdTxt;
@@ -32,12 +41,20 @@ private JPanel PatientViewPanel;
 	private JTextField patientAgeTxt;
 	private JTextField patientCityTxt;
 	private JTextField patientAddressTxt;
+	private JTextField patientSexTxt;
+	private JTextField patientZipTxt;
+	private JTextField commIdTxt;
+	private static JComboBox<String> comboBox;
+	private static JComboBox<String> comboBox_1;
 	/**
 	 * Create the panel.
 	 */
-	public PatientViewPanel(PatientHistory patientHistory , Patient p) {
+	public PatientViewPanel(PatientHistory patientHistory , Patient p,CommunityCollector communityList,HospitalDirectory hospitalDirectory,DoctorDirectory doctorDirectory) {
 		setBackground(UIManager.getColor("Desktop.background"));
 		this.patientHistory=patientHistory;
+		this.communityList=communityList;
+		this.hospitalDirectory=hospitalDirectory;
+		this.doctorDirectory=doctorDirectory;
 		//p.getAge();
 		//System.out.println(p.getAge());
 		/*Patient p = new Patient();
@@ -45,7 +62,7 @@ private JPanel PatientViewPanel;
 		//System.out.println(p.size());
 		
 		model= new DefaultTableModel();
-		Object[] column= {"PatientId","Name","Age","City","Address"};
+		Object[] column= {"PatientId","Name","Age","Sex","City","Address","Zipcode"};
 		Object[] row= new Object[0];
 		model.setColumnIdentifiers(column);
 		setLayout(null);
@@ -55,12 +72,103 @@ private JPanel PatientViewPanel;
 		add(patientViewlb);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 93, 469, 205);
+		scrollPane.setBounds(38, 93, 469, 119);
 		add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(model);
+		
+		
+		patientIdTxt = new JTextField();
+		patientIdTxt.setBounds(89, 286, 130, 26);
+		add(patientIdTxt);
+		patientIdTxt.setColumns(10);
+		
+		patientNameTxt = new JTextField();
+		patientNameTxt.setBounds(89, 334, 130, 26);
+		add(patientNameTxt);
+		patientNameTxt.setColumns(10);
+		
+		patientAgeTxt = new JTextField();
+		patientAgeTxt.setBounds(89, 377, 130, 26);
+		add(patientAgeTxt);
+		patientAgeTxt.setColumns(10);
+		
+		patientCityTxt = new JTextField();
+		patientCityTxt.setBounds(330, 377, 130, 26);
+		add(patientCityTxt);
+		patientCityTxt.setColumns(10);
+		
+		patientAddressTxt = new JTextField();
+		patientAddressTxt.setBounds(330, 286, 130, 26);
+		add(patientAddressTxt);
+		patientAddressTxt.setColumns(10);
+		
+		patientSexTxt = new JTextField();
+		patientSexTxt.setBounds(89, 427, 130, 26);
+		add(patientSexTxt);
+		patientSexTxt.setColumns(10);
+		
+		JLabel patientSexlb = new JLabel("Sex");
+		patientSexlb.setBounds(38, 432, 29, 16);
+		add(patientSexlb);
+		
+		patientZipTxt = new JTextField();
+		patientZipTxt.setBounds(330, 334, 130, 26);
+		add(patientZipTxt);
+		patientZipTxt.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Zipcode");
+		lblNewLabel.setBounds(258, 339, 61, 16);
+		add(lblNewLabel);
+		
+		commIdTxt = new JTextField();
+		commIdTxt.setBounds(330, 427, 130, 26);
+		add(commIdTxt);
+		commIdTxt.setColumns(10);
+		
+		JLabel commIdlb = new JLabel("Comm ID");
+		commIdlb.setBounds(252, 432, 61, 16);
+		add(commIdlb);
+		
+		JLabel hospDisplb = new JLabel("Hospitals Near");
+		hospDisplb.setBounds(16, 522, 111, 16);
+		add(hospDisplb);
+		
+		comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(351, 518, 130, 27);
+		add(comboBox_1);
+		
+		JLabel doclb = new JLabel("Doctor List");
+		doclb.setBounds(257, 522, 82, 16);
+		add(doclb);
+		
+		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String hospitalSelected = (String) comboBox.getSelectedItem();
+				System.out.println(hospitalSelected);
+				ArrayList<String> dNames= new ArrayList<String>();
+				dNames=doctorDirectory.showDoctorDetails(hospitalSelected);
+				System.out.println(dNames);
+System.out.println("action performed");
+				int i;	
+				for(i=0; i<dNames.size();i++) {
+					String dn=dNames.get(i);
+					comboBox_1.addItem(dn);
+				}
+			}
+		});
+		comboBox.setBounds(115, 518, 104, 27);
+		add(comboBox);
+		
+		
+		
+		
+	
+		
+		
 		
 		JButton patientDeletebtn = new JButton("Delete");
 		patientDeletebtn.setBackground(UIManager.getColor("Button.darkShadow"));
@@ -109,7 +217,7 @@ private JPanel PatientViewPanel;
 				
 			}
 		});
-		patientDeletebtn.setBounds(389, 320, 117, 29);
+		patientDeletebtn.setBounds(364, 224, 117, 29);
 		add(patientDeletebtn);
 		
 		JButton patientViewbtn = new JButton("View");
@@ -133,64 +241,58 @@ private JPanel PatientViewPanel;
 				String patientIDvalue = table.getModel().getValueAt(row, column).toString();
 				String patientNamevalue= table.getModel().getValueAt(row, 1).toString();
 				String patientAgevalue= table.getModel().getValueAt(row, 2).toString();
-				String patientCityvalue= table.getModel().getValueAt(row, 3).toString();
-				String patientAddressvalue= table.getModel().getValueAt(row, 4).toString();
+				String patientSexvalue= table.getModel().getValueAt(row, 3).toString();
+				String patientCityvalue= table.getModel().getValueAt(row, 4).toString();
+				String patientAddressvalue= table.getModel().getValueAt(row, 5).toString();
+				String patientZipvalue=table.getModel().getValueAt(row, 6).toString();
 				//System.out.println(PatientIDvalue);
-				
+				int patientZipCode=Integer.parseInt(patientZipvalue);
 				patientIdTxt.setText(patientIDvalue);
 				patientNameTxt.setText(patientNamevalue);
 				patientAgeTxt.setText(patientAgevalue);
+				patientSexTxt.setText(patientSexvalue);
 				patientCityTxt.setText(patientCityvalue);
 				patientAddressTxt.setText(patientAddressvalue);
+				patientZipTxt.setText(patientZipvalue);
+				
+	int comID=communityList.FindCommunityIdByZipcd(patientZipCode);
+	System.out.println(comID);
+	String comIDvalue=String.valueOf(comID);
+	commIdTxt.setText(comIDvalue);
+	ArrayList<String> hs= new ArrayList<String>();
+hs=hospitalDirectory.showHospitalDetails(comID);
+
+int i;	
+for(i=0; i<hs.size();i++) {
+	String s=hs.get(i);
+	comboBox.addItem(s);
+}
 				
 			}
 		});
-		patientViewbtn.setBounds(48, 320, 117, 29);
+		patientViewbtn.setBounds(38, 224, 117, 29);
 		add(patientViewbtn);
 		
-		patientIdTxt = new JTextField();
-		patientIdTxt.setBounds(89, 377, 130, 26);
-		add(patientIdTxt);
-		patientIdTxt.setColumns(10);
-		
-		patientNameTxt = new JTextField();
-		patientNameTxt.setBounds(89, 415, 130, 26);
-		add(patientNameTxt);
-		patientNameTxt.setColumns(10);
-		
-		patientAgeTxt = new JTextField();
-		patientAgeTxt.setBounds(89, 453, 130, 26);
-		add(patientAgeTxt);
-		patientAgeTxt.setColumns(10);
-		
-		patientCityTxt = new JTextField();
-		patientCityTxt.setBounds(89, 491, 130, 26);
-		add(patientCityTxt);
-		patientCityTxt.setColumns(10);
-		
-		patientAddressTxt = new JTextField();
-		patientAddressTxt.setBounds(89, 531, 130, 26);
-		add(patientAddressTxt);
-		patientAddressTxt.setColumns(10);
+	
 		
 		JLabel patientIDlb = new JLabel("PatientId");
-		patientIDlb.setBounds(16, 382, 61, 16);
+		patientIDlb.setBounds(16, 291, 61, 16);
 		add(patientIDlb);
 		
 		JLabel patientNamelb = new JLabel("Name");
-		patientNamelb.setBounds(26, 420, 45, 16);
+		patientNamelb.setBounds(32, 339, 45, 16);
 		add(patientNamelb);
 		
 		JLabel patientAgelb = new JLabel("Age");
-		patientAgelb.setBounds(38, 458, 29, 16);
+		patientAgelb.setBounds(38, 382, 29, 16);
 		add(patientAgelb);
 		
 		JLabel patientCitylb = new JLabel("City");
-		patientCitylb.setBounds(33, 496, 38, 16);
+		patientCitylb.setBounds(275, 382, 38, 16);
 		add(patientCitylb);
 		
 		JLabel patientAddresslb = new JLabel("Address");
-		patientAddresslb.setBounds(16, 536, 61, 16);
+		patientAddresslb.setBounds(257, 291, 61, 16);
 		add(patientAddresslb);
 		
 		JButton patientUpdatebtn = new JButton("Update");
@@ -220,13 +322,15 @@ private JPanel PatientViewPanel;
 					String patientAddressvalue= table.getModel().getValueAt(row, 4).toString();
 					int patientID=Integer.parseInt(patientIDvalue);
 					int patientAge=Integer.parseInt(patientAgevalue);
-				Patient currentPatient = new Patient();
+				House ch = new House();
+				Person cp = new Person(ch);
+				Patient currentPatient = new Patient(cp,ch);
 				currentPatient.setPatientId(patientID);
 				currentPatient.setAge(patientAge);
 				currentPatient.setName(patientNamevalue);
 				currentPatient.setPatientCity(patientCityvalue);
 				currentPatient.setPatientAddress(patientAddressvalue);
-				System.out.println(row);
+				//System.out.println(row);
 				
 				
 		    String	pID=patientIdTxt.getText().trim();
@@ -242,7 +346,9 @@ private JPanel PatientViewPanel;
 			System.out.println(ppAge);
 			System.out.println(pCity);
 			System.out.println(pAdd);
-			Patient newPatient= new Patient();	
+			House nh= new House();
+			Person np= new Person(nh);
+			Patient newPatient= new Patient(np,nh);	
 			newPatient.setPatientId(ppID);
 			newPatient.setName(pName);
 			newPatient.setAge(ppAge);
@@ -261,8 +367,12 @@ private JPanel PatientViewPanel;
 			}
 			
 		});
-		patientUpdatebtn.setBounds(218, 320, 117, 29);
+		patientUpdatebtn.setBounds(196, 224, 117, 29);
 		add(patientUpdatebtn);
+		
+		
+		
+		
 		
 		populatePatientDetails();
 		
@@ -275,13 +385,14 @@ private JPanel PatientViewPanel;
 	
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		Object[] column = new Object[5]; // just now added
+		Object[] column = new Object[7]; // just now added
 		column[0]="PatientId";
 		column[1]="Name";
 		column[2]="Age";
-		column[3]="City";
-		column[4]="Address";
-		
+		column[3]="Sex";
+		column[4]="City";
+		column[5]="Address";
+		column[6]="Zipcode";
 		
 		//Object[] column= {"Name","EmplID","Gender","Position","TeamInfo"};//just commented.
 		//Object[] row= new Object[0];
@@ -291,12 +402,14 @@ private JPanel PatientViewPanel;
 		for (Patient p: patientHistory.getHistory()) {
 			//Object[] column= {"Name","EmplID","Gender","Position","TeamInfo"};
 			
-			Object[] row = new Object[5];
+			Object[] row = new Object[7];
 			row[0] = p.getPatientId();
 			row[1]= p.getName();
 			row[2]=p.getAge();
-			row[3]=p.getPatientCity();
-			row[4]=p.getPatientAddress();
+			row[3]=p.getSex();
+			row[4]=p.getPatientCity();
+			row[5]=p.getPatientAddress();
+			row[6]=p.getZipcode();
 		
 			model.addRow(row);
 		}

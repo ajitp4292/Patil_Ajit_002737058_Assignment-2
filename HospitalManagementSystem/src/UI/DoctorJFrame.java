@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class DoctorJFrame extends JFrame {
@@ -25,6 +26,7 @@ public class DoctorJFrame extends JFrame {
 	private static DoctorDirectory doctorDirectory;
 	private static JFrame loginFrame;
 	private static DoctorJFrame frame;
+	//private static ArrayList<String> doctorNames;
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +50,7 @@ public class DoctorJFrame extends JFrame {
 DoctorJFrame.loginFrame=loginFrame;
 		
 		this.doctorDirectory=doctorDirectory;
+		//DoctorJFrame.doctorNames=doctorNames;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 663, 550);
 		contentPane = new JPanel();

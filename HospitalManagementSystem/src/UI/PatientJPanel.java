@@ -6,12 +6,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Model.House;
 import Model.Patient;
 import Model.PatientHistory;
+import Model.Person;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
+import javax.swing.JRadioButton;
 
 public class PatientJPanel extends JPanel {
 	private JTextField patienttxt;
@@ -21,6 +28,7 @@ public class PatientJPanel extends JPanel {
 	private JTextField patientAddresstxt;
 PatientHistory patientHistory;
 private JPanel PatientJPanel;
+private JTextField patientZipcdTxt;
 
 	/**
 	 * Create the panel.
@@ -52,7 +60,7 @@ private JPanel PatientJPanel;
 		
 		
 		JLabel patientNamelb = new JLabel("Name");
-		patientNamelb.setBounds(129, 117, 61, 16);
+		patientNamelb.setBounds(139, 117, 61, 16);
 		add(patientNamelb);
 		
 		patientNametxt = new JTextField();
@@ -61,7 +69,7 @@ private JPanel PatientJPanel;
 		patientNametxt.setColumns(10);
 		
 		JLabel patientAgelb = new JLabel("Age");
-		patientAgelb.setBounds(129, 172, 61, 16);
+		patientAgelb.setBounds(152, 172, 32, 16);
 		add(patientAgelb);
 		
 		patientAgetxt = new JTextField();
@@ -70,46 +78,78 @@ private JPanel PatientJPanel;
 		patientAgetxt.setColumns(10);
 		
 		JLabel patientCitylb = new JLabel("City");
-		patientCitylb.setBounds(129, 226, 61, 16);
+		patientCitylb.setBounds(158, 292, 32, 16);
 		add(patientCitylb);
 		
 		patientCitytxt = new JTextField();
-		patientCitytxt.setBounds(225, 221, 130, 26);
+		patientCitytxt.setBounds(225, 287, 130, 26);
 		add(patientCitytxt);
 		patientCitytxt.setColumns(10);
 		
 		JLabel patientAddrlb = new JLabel("Address");
-		patientAddrlb.setBounds(129, 288, 61, 16);
+		patientAddrlb.setBounds(139, 346, 61, 16);
 		add(patientAddrlb);
 		
 		patientAddresstxt = new JTextField();
-		patientAddresstxt.setBounds(225, 283, 130, 26);
+		patientAddresstxt.setBounds(225, 341, 130, 26);
 		add(patientAddresstxt);
 		patientAddresstxt.setColumns(10);
+		
+		patientZipcdTxt = new JTextField();
+		patientZipcdTxt.setBounds(225, 394, 130, 26);
+		add(patientZipcdTxt);
+		patientZipcdTxt.setColumns(10);
+		
+		JLabel patientZiplb = new JLabel("ZipCode");
+		patientZiplb.setBounds(152, 399, 61, 16);
+		add(patientZiplb);
+		
+		JLabel patientSexlb = new JLabel("Sex");
+		patientSexlb.setBounds(152, 228, 32, 16);
+		add(patientSexlb);
+		
+		JRadioButton maleradiobtn = new JRadioButton("Male");
+		maleradiobtn.setBounds(213, 224, 70, 23);
+		add(maleradiobtn);
+		
+		JRadioButton femaleradiobtn = new JRadioButton("Female");
+		femaleradiobtn.setBounds(295, 224, 76, 23);
+		add(femaleradiobtn);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(maleradiobtn);
+		group.add(femaleradiobtn);
 		
 		JButton patientdatasavebtn = new JButton("Save");
 		patientdatasavebtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		patientdatasavebtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Enumeration<AbstractButton> bg= group.getElements();
+				JRadioButton jrd= (JRadioButton)bg.nextElement();
 				String patientId=patienttxt.getText();
 				//System.out.println(patientId);
 				String patientIdtrim=patientId.trim();
-				String name= patientNametxt.getText();
+				String name= patientNametxt.getText().trim();
 				String age=patientAgetxt.getText();
 				String ageTrim=age.trim();
-		String city=patientCitytxt.getText();
-		String Address=patientAddresstxt.getText();
-				
+				String sex=jrd.getText().trim();
+		String city=patientCitytxt.getText().trim();
+		String Address=patientAddresstxt.getText().trim();
+	String 	Zipcd=patientZipcdTxt.getText().trim();
 		int patientID=Integer.parseInt(patientIdtrim);
 		int patientAge=Integer.parseInt(ageTrim);
+		int patientZipcd=Integer.parseInt(Zipcd);;
 		//System.out.println(patientID);
-		Patient p = patientHistory.addNewPatients();
-		p.setPatientId(patientID);
-		p.setAge(patientAge);
-		p.setName(name);
-		p.setPatientCity(city);
-		p.setPatientAddress(Address);
+		House h= new House();
+		Person p= new Person(h);
+		Patient patient = patientHistory.addNewPatients(p,h);
+		patient.setPatientId(patientID);
+		patient.setAge(patientAge);
+		patient.setName(name);
+		patient.setSex(sex);
+		patient.setPatientCity(city);
+		patient.setPatientAddress(Address);
+		patient.setZipcode(patientZipcd);
 		
 		//p.hashCode();
 		
@@ -123,6 +163,7 @@ private JPanel PatientJPanel;
 		patientAgetxt.setText(" ");
 		patientCitytxt.setText(" ");
 		patientAddresstxt.setText(" ");
+		patientZipcdTxt.setText(" ");
 		
 		//System.out.println(patientHistory.getSize());
 		int size=patientHistory.getSize();
@@ -140,10 +181,11 @@ private JPanel PatientJPanel;
 		
 			}
 		});
-		patientdatasavebtn.setBounds(238, 356, 117, 29);
+		patientdatasavebtn.setBounds(238, 459, 117, 29);
 		add(patientdatasavebtn);
+		
+		
 		
 
 	}
-	
 }
