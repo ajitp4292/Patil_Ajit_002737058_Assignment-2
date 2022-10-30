@@ -50,13 +50,26 @@ private JTextField commIDTxt;
 		add(commIdlb);
 		
 		
+		
+		
 		commIDTxt = new JTextField();
+		commIDTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					commIDTxt.setEditable(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(CommunityJPanel, "Community Id must be a Integer value");
+					commIDTxt.setEditable(false);
+				}
+			}
+		});
 		commIDTxt.setBounds(183, 79, 130, 26);
 		add(commIDTxt);
 		commIDTxt.setColumns(10);
-		
-		
-		
 		int size=communityList.getSize();
 		int id = (size+1);
 		String pid=String.valueOf(id);
@@ -67,7 +80,10 @@ private JTextField commIDTxt;
 		else {
 			commIDTxt.setText(pid);
 		}
-		commIDTxt.setEditable(true);
+		
+		
+	
+		
 		
 		commCityTxt = new JTextField();
 		commCityTxt.addKeyListener(new KeyAdapter() {

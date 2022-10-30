@@ -107,7 +107,7 @@ private static DoctorDirectory doctorDirectory;
 			}
 		});
 		
-		JButton btnViewPatient = new JButton("View Patient");
+		JButton btnViewPatient = new JButton("Patient Manager");
 		btnViewPatient.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnViewPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,36 +129,31 @@ private static DoctorDirectory doctorDirectory;
 				
 			}
 		});
-		
-		JButton hospSrhbtn = new JButton("Search Hospital");
+	
 		GroupLayout gl_controlAreaPatient = new GroupLayout(controlAreaPatient);
 		gl_controlAreaPatient.setHorizontalGroup(
-			gl_controlAreaPatient.createParallelGroup(Alignment.LEADING)
+			gl_controlAreaPatient.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_controlAreaPatient.createSequentialGroup()
-					.addGap(20)
-					.addComponent(logoutbtn)
-					.addContainerGap(24, Short.MAX_VALUE))
-				.addGroup(gl_controlAreaPatient.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_controlAreaPatient.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNewPatient)
-						.addComponent(btnViewPatient))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_controlAreaPatient.createSequentialGroup()
-					.addContainerGap(9, Short.MAX_VALUE)
-					.addComponent(hospSrhbtn, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-					.addGap(14))
+					.addGroup(gl_controlAreaPatient.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_controlAreaPatient.createSequentialGroup()
+							.addGap(20)
+							.addComponent(logoutbtn))
+						.addGroup(gl_controlAreaPatient.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnViewPatient))
+						.addGroup(gl_controlAreaPatient.createSequentialGroup()
+							.addGap(15)
+							.addComponent(btnNewPatient)))
+					.addContainerGap(31, Short.MAX_VALUE))
 		);
 		gl_controlAreaPatient.setVerticalGroup(
 			gl_controlAreaPatient.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_controlAreaPatient.createSequentialGroup()
-					.addGap(121)
+					.addGap(123)
 					.addComponent(btnNewPatient)
-					.addGap(28)
+					.addGap(26)
 					.addComponent(btnViewPatient)
-					.addGap(34)
-					.addComponent(hospSrhbtn)
-					.addPreferredGap(ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
 					.addComponent(logoutbtn)
 					.addGap(53))
 		);

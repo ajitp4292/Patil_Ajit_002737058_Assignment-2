@@ -13,6 +13,8 @@ import Model.HospitalDirectory;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class HospitalJPanel extends JPanel {
 	private JTextField hospitalIDTxt;
@@ -49,6 +51,19 @@ public class HospitalJPanel extends JPanel {
 		add(hospCommNameTxt);
 		
 		hospitalIDTxt = new JTextField();
+		hospitalIDTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					hospitalIDTxt.setEditable(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(HospitalJPanel, "Hospital Id must be a Integer value");
+					hospitalIDTxt.setEditable(false);
+				}
+			}
+		});
 		hospitalIDTxt.setBounds(181, 46, 130, 26);
 		add(hospitalIDTxt);
 		hospitalIDTxt.setColumns(10);
@@ -72,16 +87,64 @@ public class HospitalJPanel extends JPanel {
 		
 		
 		hospitalNameTxt = new JTextField();
+		hospitalNameTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					hospitalNameTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(HospitalJPanel, "Hospital Name must be a String value");
+						hospitalNameTxt.setEditable(false);
+						
+					}
+				
+			}
+		});
 		hospitalNameTxt.setBounds(181, 100, 130, 26);
 		add(hospitalNameTxt);
 		hospitalNameTxt.setColumns(10);
 		
 		hospCommIDTxt = new JTextField();
+		hospCommIDTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					hospCommIDTxt.setEditable(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(HospitalJPanel, "Community ID must be a Integer value");
+					hospCommIDTxt.setEditable(false);
+				}
+				
+			}
+		});
 		hospCommIDTxt.setBounds(181, 164, 130, 26);
 		add(hospCommIDTxt);
 		hospCommIDTxt.setColumns(10);
 		
 		commNameTxt = new JTextField();
+		commNameTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					commNameTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(HospitalJPanel, "Community Name must be a String value");
+						commNameTxt.setEditable(false);
+						
+					}
+				
+			}
+		});
 		commNameTxt.setBounds(181, 232, 130, 26);
 		add(commNameTxt);
 		commNameTxt.setColumns(10);
@@ -89,7 +152,7 @@ public class HospitalJPanel extends JPanel {
 		JButton saveHospbtn = new JButton("Save");
 		saveHospbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ( hospitalIDTxt.getText().equals("") || hospitalNameTxt.getText().equals("") || hospCommIDTxt.getText().equals("") || commNameTxt.getText().equals(""))
+				if ( hospitalIDTxt.getText().equals(" ") || hospitalNameTxt.getText().equals(" ") || hospCommIDTxt.getText().equals(" ") || commNameTxt.getText().equals(" "))
 				{
 			JOptionPane.showMessageDialog(HospitalJPanel, "Please fill the information Completely.");
 		}

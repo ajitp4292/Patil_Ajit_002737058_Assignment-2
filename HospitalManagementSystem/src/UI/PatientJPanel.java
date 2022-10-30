@@ -19,6 +19,8 @@ import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.JRadioButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PatientJPanel extends JPanel {
 	private JTextField patienttxt;
@@ -43,6 +45,21 @@ private JTextField patientZipcdTxt;
 		add(patientIdlb);
 		
 		patienttxt = new JTextField();
+		patienttxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					patienttxt.setEditable(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(PatientJPanel, "Patient Id must be a Integer value");
+					patienttxt.setEditable(false);
+				}
+				
+			}
+		});
 		patienttxt.setBounds(225, 60, 130, 26);
 		add(patienttxt);
 		patienttxt.setColumns(10);
@@ -64,6 +81,22 @@ private JTextField patientZipcdTxt;
 		add(patientNamelb);
 		
 		patientNametxt = new JTextField();
+		patientNametxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					patientNametxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(PatientJPanel, "Patient Name must be a String value");
+						patientNametxt.setEditable(false);
+						
+					}
+			}
+		});
 		patientNametxt.setBounds(225, 112, 130, 26);
 		add(patientNametxt);
 		patientNametxt.setColumns(10);
@@ -73,6 +106,20 @@ private JTextField patientZipcdTxt;
 		add(patientAgelb);
 		
 		patientAgetxt = new JTextField();
+		patientAgetxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					patientAgetxt.setEditable(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(PatientJPanel, "Patient Age must be a Integer value");
+					patientAgetxt.setEditable(false);
+				}
+				
+			}
+		});
 		patientAgetxt.setBounds(225, 167, 130, 26);
 		add(patientAgetxt);
 		patientAgetxt.setColumns(10);
@@ -82,6 +129,23 @@ private JTextField patientZipcdTxt;
 		add(patientCitylb);
 		
 		patientCitytxt = new JTextField();
+		patientCitytxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					patientCitytxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(PatientJPanel, "Patient City must be a String value");
+						patientCitytxt.setEditable(false);
+						
+					}
+				
+			}
+		});
 		patientCitytxt.setBounds(225, 287, 130, 26);
 		add(patientCitytxt);
 		patientCitytxt.setColumns(10);
@@ -96,6 +160,20 @@ private JTextField patientZipcdTxt;
 		patientAddresstxt.setColumns(10);
 		
 		patientZipcdTxt = new JTextField();
+		patientZipcdTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					patientZipcdTxt.setEditable(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(PatientJPanel, "Patient Zipcode must be a Integer value");
+					patientZipcdTxt.setEditable(false);
+				}
+				
+			}
+		});
 		patientZipcdTxt.setBounds(225, 394, 130, 26);
 		add(patientZipcdTxt);
 		patientZipcdTxt.setColumns(10);
@@ -124,6 +202,14 @@ private JTextField patientZipcdTxt;
 		patientdatasavebtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		patientdatasavebtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if ( patienttxt.getText().equals("") || patientNametxt.getText().equals("") || patientAgetxt.getText().equals("") || 
+						patientCitytxt.getText().equals("") || patientAddresstxt.getText().equals("") || patientZipcdTxt.getText().equals(""))
+				{
+			JOptionPane.showMessageDialog(PatientJPanel, "Please fill the information Completely.");
+		}
+				else {
+					
+				
 				Enumeration<AbstractButton> bg= group.getElements();
 				JRadioButton jrd= (JRadioButton)bg.nextElement();
 				String patientId=patienttxt.getText();
@@ -177,7 +263,7 @@ private JTextField patientZipcdTxt;
 			patienttxt.setText(pid);
 		}
 		
-		
+				}
 		
 			}
 		});

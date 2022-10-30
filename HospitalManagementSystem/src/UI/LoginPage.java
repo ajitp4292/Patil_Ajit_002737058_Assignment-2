@@ -22,6 +22,7 @@ import Model.Hospital;
 import Model.HospitalDirectory;
 import Model.Patient;
 import Model.PatientHistory;
+import Model.PersonDirectory;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -41,6 +42,7 @@ public class LoginPage implements ActionListener{
 	private static JButton loginBtn;
 	private static JButton signUp;
 	private JPanel loginPanel;
+	private JPanel PersonSignUp;
 	private static JFrame loginFrame;
 	private JFrame PatientJFrame;
 	private JFrame CommunityJFrame;
@@ -51,6 +53,7 @@ public class LoginPage implements ActionListener{
 	private static HospitalDirectory hospitalDirectory;
 	private static DoctorDirectory doctorDirectory;
 	private static EncounterHistory encounterHistory;
+	private static PersonDirectory personDirectory;
     //Community comm;
 	Patient p;
 	private static Hospital hosp;
@@ -65,6 +68,7 @@ public class LoginPage implements ActionListener{
 		hospitalDirectory= new HospitalDirectory();
 		doctorDirectory= new DoctorDirectory();
 		encounterHistory= new EncounterHistory();
+		personDirectory= new PersonDirectory();
 		//comm= new Community();
 		//hosp= new Hospital(comm);
 		
@@ -117,17 +121,23 @@ public class LoginPage implements ActionListener{
 		signUp=new JButton("Signup");
 		signUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("SignUp clicked");
+				//System.out.println("SignUp clicked");
 				String user = usernameTxt.getText();
 				String password=passwordTxt.getText();
 				String selectedRole = (String) userRole.getSelectedItem();
-				System.out.println(password);
-				System.out.println(selectedRole);
+				//System.out.println(password);
+				//System.out.println(selectedRole);
+
+				Register Frame = new Register(personDirectory,loginFrame);
+				//patientJFrame.setVisible(true);
+				//PatientViewPanel pPanelview = new PatientViewPanel(patientHistory,p);
+				Frame.setVisible(true);
+				loginFrame.dispose();
 				
 				userlist.add(user);
 				userlist.add(password);
 				userlist.add(selectedRole);
-				System.out.println(userlist);
+				//System.out.println(userlist);
 				
 				usernameTxt.setText("");
 				passwordTxt.setText("");

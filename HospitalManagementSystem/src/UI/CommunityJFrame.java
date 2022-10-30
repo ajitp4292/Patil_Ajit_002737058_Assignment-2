@@ -106,7 +106,7 @@ public class CommunityJFrame extends JFrame {
 		});
 		commlogoutbtn.setForeground(UIManager.getColor("Button.darkShadow"));
 		
-		JButton searchcommbtn = new JButton("Search");
+		JButton searchcommbtn = new JButton("Search Community");
 		searchcommbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CommunitySearch communitysearch = new CommunitySearch(communityList,hosp1,hosp2);
@@ -144,13 +144,12 @@ public class CommunityJFrame extends JFrame {
 							.addGap(20)
 							.addGroup(gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
 								.addComponent(commHospcreatelb, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-								.addComponent(commHospitalManlb, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(commHospitalManlb, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+								.addComponent(searchcommbtn)))
 						.addGroup(gl_controlAreacommunity.createSequentialGroup()
 							.addGap(44)
-							.addGroup(gl_controlAreacommunity.createParallelGroup(Alignment.LEADING)
-								.addComponent(commlogoutbtn)
-								.addComponent(searchcommbtn))))
-					.addContainerGap(30, Short.MAX_VALUE))
+							.addComponent(commlogoutbtn)))
+					.addContainerGap(54, Short.MAX_VALUE))
 				.addGroup(gl_controlAreacommunity.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(communityManage, 0, 0, Short.MAX_VALUE)
@@ -167,9 +166,9 @@ public class CommunityJFrame extends JFrame {
 					.addComponent(commHospcreatelb)
 					.addGap(18)
 					.addComponent(commHospitalManlb)
-					.addGap(27)
+					.addGap(26)
 					.addComponent(searchcommbtn)
-					.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
 					.addComponent(commlogoutbtn)
 					.addGap(44))
 		);

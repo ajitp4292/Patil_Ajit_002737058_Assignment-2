@@ -18,6 +18,8 @@ import javax.swing.JSeparator;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CommunityMangJPanel extends JPanel {
 	private JTable table;
@@ -61,22 +63,80 @@ private JPanel CommunityMangJPanel;
 		add(commIDlb);
 		
 		commIDTxt = new JTextField();
+		commIDTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					commIDTxt.setEditable(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(CommunityMangJPanel, "Community Id must be a Integer value");
+					commIDTxt.setEditable(false);
+				}
+			}
+		});
 		commIDTxt.setBounds(157, 303, 130, 26);
 		add(commIDTxt);
 		commIDTxt.setColumns(10);
 		
 		
 		commCityTxt = new JTextField();
+		commCityTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					commCityTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(CommunityMangJPanel, "City must be a String value");
+						commCityTxt.setEditable(false);
+						
+					}
+			}
+		});
 		commCityTxt.setBounds(157, 348, 130, 26);
 		add(commCityTxt);
 		commCityTxt.setColumns(10);
 		
 		commNameTxt = new JTextField();
+		commNameTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					//allow only letter,space and Iso control char
+				
+					commNameTxt.setEditable(true);
+				}
+					else {
+						JOptionPane.showMessageDialog(CommunityMangJPanel, "Community Name must be a String value");
+						commNameTxt.setEditable(false);
+						
+					}
+			}
+		});
 		commNameTxt.setBounds(160, 403, 127, 26);
 		add(commNameTxt);
 		commNameTxt.setColumns(10);
 		
 		commZipcodeTxt = new JTextField();
+		commZipcodeTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					commZipcodeTxt.setEditable(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(CommunityMangJPanel, "Community Zipcode must be a Integer value");
+					commZipcodeTxt.setEditable(false);
+				}
+			}
+		});
 		commZipcodeTxt.setBounds(157, 454, 130, 26);
 		add(commZipcodeTxt);
 		commZipcodeTxt.setColumns(10);
@@ -255,6 +315,10 @@ private JPanel CommunityMangJPanel;
 		commDelbtn.setBackground(UIManager.getColor("Button.darkShadow"));
 		commDelbtn.setBounds(279, 248, 117, 29);
 		add(commDelbtn);
+		
+		JLabel lblNewLabel = new JLabel("Note:View and then Update");
+		lblNewLabel.setBounds(137, 487, 182, 16);
+		add(lblNewLabel);
 		
 		
 	
