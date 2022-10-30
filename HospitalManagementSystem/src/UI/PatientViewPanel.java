@@ -318,48 +318,56 @@ for(i=0; i<hs.size();i++) {
 					String patientIDvalue = table.getModel().getValueAt(row, column).toString();
 					String patientNamevalue= table.getModel().getValueAt(row, 1).toString();
 					String patientAgevalue= table.getModel().getValueAt(row, 2).toString();
-					String patientCityvalue= table.getModel().getValueAt(row, 3).toString();
-					String patientAddressvalue= table.getModel().getValueAt(row, 4).toString();
+					String patientSexvalue= table.getModel().getValueAt(row, 3).toString();
+					String patientCityvalue= table.getModel().getValueAt(row, 4).toString();
+					String patientAddressvalue= table.getModel().getValueAt(row, 5).toString();
+					String patientZipcodevalue=table.getModel().getValueAt(row, 6).toString();
 					int patientID=Integer.parseInt(patientIDvalue);
 					int patientAge=Integer.parseInt(patientAgevalue);
+					int patientZipcodeInt=Integer.parseInt(patientZipcodevalue);
+					
 				House ch = new House();
 				Person cp = new Person(ch);
 				Patient currentPatient = new Patient(cp,ch);
 				currentPatient.setPatientId(patientID);
-				currentPatient.setAge(patientAge);
 				currentPatient.setName(patientNamevalue);
+				currentPatient.setAge(patientAge);
+				currentPatient.setSex(patientSexvalue);
+				
 				currentPatient.setPatientCity(patientCityvalue);
 				currentPatient.setPatientAddress(patientAddressvalue);
+				currentPatient.setZipcode(patientZipcodeInt);
 				//System.out.println(row);
 				
 				
 		    String	pID=patientIdTxt.getText().trim();
 			String	pName=patientNameTxt.getText().trim();
 			String	pAge=patientAgeTxt.getText().trim();
+			String  pSex=patientSexTxt.getText().trim();
 			String	pCity=patientCityTxt.getText().trim();
 			String	pAdd=patientAddressTxt.getText().trim();
+			String pZipcd=patientZipTxt.getText().trim();
 			int ppID=Integer.parseInt(pID);
 			int ppAge=Integer.parseInt(pAge);
+			int pZipcdInt=Integer.parseInt(pZipcd);
 			
-			System.out.println(ppID);
-			System.out.println(pName);
-			System.out.println(ppAge);
-			System.out.println(pCity);
-			System.out.println(pAdd);
+			
 			House nh= new House();
 			Person np= new Person(nh);
 			Patient newPatient= new Patient(np,nh);	
 			newPatient.setPatientId(ppID);
 			newPatient.setName(pName);
 			newPatient.setAge(ppAge);
+			newPatient.setSex(pSex);
 			newPatient.setPatientCity(pCity);
 			newPatient.setPatientAddress(pAdd);
+			newPatient.setZipcode(pZipcdInt);
 			
 			patientHistory.modifyPatients(currentPatient, newPatient,row);
 			
 			populatePatientDetails();
 			
-			patientHistory.printPatientlist();
+			//patientHistory.printPatientlist();
 			
 				}
 				

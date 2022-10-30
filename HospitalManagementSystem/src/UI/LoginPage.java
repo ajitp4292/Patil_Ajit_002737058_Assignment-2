@@ -17,6 +17,7 @@ import Model.Community;
 import Model.CommunityCollector;
 import Model.Doctor;
 import Model.DoctorDirectory;
+import Model.EncounterHistory;
 import Model.Hospital;
 import Model.HospitalDirectory;
 import Model.Patient;
@@ -49,6 +50,7 @@ public class LoginPage implements ActionListener{
 	private static CommunityCollector communityList;
 	private static HospitalDirectory hospitalDirectory;
 	private static DoctorDirectory doctorDirectory;
+	private static EncounterHistory encounterHistory;
     //Community comm;
 	Patient p;
 	private static Hospital hosp;
@@ -62,6 +64,7 @@ public class LoginPage implements ActionListener{
 		communityList = new CommunityCollector();
 		hospitalDirectory= new HospitalDirectory();
 		doctorDirectory= new DoctorDirectory();
+		encounterHistory= new EncounterHistory();
 		//comm= new Community();
 		//hosp= new Hospital(comm);
 		
@@ -188,6 +191,14 @@ public class LoginPage implements ActionListener{
 		doctJframe.setVisible(true);
 		loginFrame.dispose();
 		
+		
+	}
+	
+	
+	if (selectedRolelg == "DOCTOR") {
+		EncounterJFrame encntJFrame= new EncounterJFrame(patientHistory,loginFrame,encounterHistory);
+		encntJFrame.setVisible(true);
+		loginFrame.dispose();
 		
 	}
 
