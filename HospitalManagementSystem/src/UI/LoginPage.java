@@ -183,9 +183,10 @@ public class LoginPage implements ActionListener{
 			loginFrame.dispose();
 			
 		}
-	if(selectedRolelg =="ADMIN") {
-		System.out.println("Welcome homepage ADMIN");
-		
+	if(selectedRolelg =="SYSTEMADMIN") {
+		SystemJFrame systemadmin= new SystemJFrame(loginFrame,patientHistory,communityList,hospitalDirectory,doctorDirectory,encounterHistory,personDirectory);
+		systemadmin.setVisible(true);
+		loginFrame.dispose();
 	}
 	
 	if(selectedRolelg =="COMMUNITYADMIN") {

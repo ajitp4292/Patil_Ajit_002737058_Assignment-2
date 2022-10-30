@@ -72,7 +72,7 @@ private JPanel PatientViewPanel;
 		add(patientViewlb);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 93, 469, 119);
+		scrollPane.setBounds(38, 93, 422, 119);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -81,32 +81,32 @@ private JPanel PatientViewPanel;
 		
 		
 		patientIdTxt = new JTextField();
-		patientIdTxt.setBounds(89, 286, 130, 26);
+		patientIdTxt.setBounds(89, 286, 93, 26);
 		add(patientIdTxt);
 		patientIdTxt.setColumns(10);
 		
 		patientNameTxt = new JTextField();
-		patientNameTxt.setBounds(89, 334, 130, 26);
+		patientNameTxt.setBounds(89, 334, 93, 26);
 		add(patientNameTxt);
 		patientNameTxt.setColumns(10);
 		
 		patientAgeTxt = new JTextField();
-		patientAgeTxt.setBounds(89, 377, 130, 26);
+		patientAgeTxt.setBounds(89, 377, 93, 26);
 		add(patientAgeTxt);
 		patientAgeTxt.setColumns(10);
 		
 		patientCityTxt = new JTextField();
-		patientCityTxt.setBounds(330, 377, 130, 26);
+		patientCityTxt.setBounds(284, 377, 104, 26);
 		add(patientCityTxt);
 		patientCityTxt.setColumns(10);
 		
 		patientAddressTxt = new JTextField();
-		patientAddressTxt.setBounds(330, 286, 130, 26);
+		patientAddressTxt.setBounds(284, 286, 104, 26);
 		add(patientAddressTxt);
 		patientAddressTxt.setColumns(10);
 		
 		patientSexTxt = new JTextField();
-		patientSexTxt.setBounds(89, 427, 130, 26);
+		patientSexTxt.setBounds(89, 427, 93, 26);
 		add(patientSexTxt);
 		patientSexTxt.setColumns(10);
 		
@@ -115,33 +115,33 @@ private JPanel PatientViewPanel;
 		add(patientSexlb);
 		
 		patientZipTxt = new JTextField();
-		patientZipTxt.setBounds(330, 334, 130, 26);
+		patientZipTxt.setBounds(284, 334, 104, 26);
 		add(patientZipTxt);
 		patientZipTxt.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Zipcode");
-		lblNewLabel.setBounds(258, 339, 61, 16);
+		lblNewLabel.setBounds(211, 339, 61, 16);
 		add(lblNewLabel);
 		
 		commIdTxt = new JTextField();
-		commIdTxt.setBounds(330, 427, 130, 26);
+		commIdTxt.setBounds(284, 427, 104, 26);
 		add(commIdTxt);
 		commIdTxt.setColumns(10);
 		
 		JLabel commIdlb = new JLabel("Comm ID");
-		commIdlb.setBounds(252, 432, 61, 16);
+		commIdlb.setBounds(211, 432, 61, 16);
 		add(commIdlb);
 		
 		JLabel hospDisplb = new JLabel("Hospitals Near");
-		hospDisplb.setBounds(16, 522, 111, 16);
+		hospDisplb.setBounds(16, 488, 111, 16);
 		add(hospDisplb);
 		
 		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(351, 518, 130, 27);
+		comboBox_1.setBounds(312, 484, 82, 27);
 		add(comboBox_1);
 		
 		JLabel doclb = new JLabel("Doctor List");
-		doclb.setBounds(257, 522, 82, 16);
+		doclb.setBounds(227, 488, 82, 16);
 		add(doclb);
 		
 		comboBox = new JComboBox();
@@ -160,7 +160,7 @@ System.out.println("action performed");
 				}
 			}
 		});
-		comboBox.setBounds(115, 518, 104, 27);
+		comboBox.setBounds(112, 484, 93, 27);
 		add(comboBox);
 		
 		
@@ -217,7 +217,7 @@ System.out.println("action performed");
 				
 			}
 		});
-		patientDeletebtn.setBounds(364, 224, 117, 29);
+		patientDeletebtn.setBounds(296, 224, 117, 29);
 		add(patientDeletebtn);
 		
 		JButton patientViewbtn = new JButton("View");
@@ -288,11 +288,11 @@ for(i=0; i<hs.size();i++) {
 		add(patientAgelb);
 		
 		JLabel patientCitylb = new JLabel("City");
-		patientCitylb.setBounds(275, 382, 38, 16);
+		patientCitylb.setBounds(211, 382, 38, 16);
 		add(patientCitylb);
 		
 		JLabel patientAddresslb = new JLabel("Address");
-		patientAddresslb.setBounds(257, 291, 61, 16);
+		patientAddresslb.setBounds(211, 291, 61, 16);
 		add(patientAddresslb);
 		
 		JButton patientUpdatebtn = new JButton("Update");
@@ -375,7 +375,7 @@ for(i=0; i<hs.size();i++) {
 			}
 			
 		});
-		patientUpdatebtn.setBounds(196, 224, 117, 29);
+		patientUpdatebtn.setBounds(167, 224, 117, 29);
 		add(patientUpdatebtn);
 		
 		
